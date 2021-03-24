@@ -60,10 +60,6 @@ afpd_LDADD += $(top_builddir)/etc/spotlight/libspotlight.la @TALLOC_LIBS@
 afpd_CFLAGS += @TRACKER_CFLAGS@ @TALLOC_CFLAGS@
 endif
 
-if HAVE_ACLS
-afpd_SOURCES += acls.c
-endif
-
 if HAVE_DBUS_GLIB
 BUILT_SOURCES += afpstats_service_glue.h
 DISTCLEANFILES += afpstats_service_glue.h
@@ -92,5 +88,5 @@ endif
 
 noinst_HEADERS = auth.h afp_config.h desktop.h directory.h fce_api_internal.h file.h \
 	 filedir.h fork.h icon.h mangle.h misc.h status.h switch.h \
-	 uam_auth.h unix.h volume.h hash.h acls.h acl_mappings.h extattrs.h \
+	 uam_auth.h unix.h volume.h hash.h extattrs.h \
 	 dircache.h afpstats_obj.h afpstats.h
