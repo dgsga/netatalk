@@ -19,31 +19,7 @@
 #include <config.h>
 #endif
 
-#if HAVE_ATTR_XATTR_H
-#include <attr/xattr.h>
-#elif HAVE_SYS_XATTR_H
 #include <sys/xattr.h>
-#endif
-
-#ifdef HAVE_SYS_EA_H
-#include <sys/ea.h>
-#endif
-
-#ifdef HAVE_SYS_EXTATTR_H
-#include <sys/extattr.h>
-#endif
-
-#if defined(SOLARIS) && defined(HAVE_SYS_ATTR_H)
-#include <sys/attr.h>
-#endif
-
-/* FIXME: are the ACL includes really neccessary here ? */
-#ifdef HAVE_SOLARIS_ACLS
-#include <sys/acl.h>
-#endif
-#ifdef HAVE_FREEBSD_SUNACL
-#include <sunacl.h>
-#endif
 
 #ifndef ENOATTR
 #define ENOATTR ENODATA
