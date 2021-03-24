@@ -41,7 +41,7 @@ afpd_SOURCES = \
 
 afpd_LDADD =  \
 	$(top_builddir)/libatalk/libatalk.la \
-	@LIBGCRYPT_LIBS@ @WRAP_LIBS@ @LIBADD_DL@ @ACL_LIBS@ @PTHREAD_LIBS@ @GSSAPI_LIBS@ @KRB5_LIBS@ @MYSQL_LIBS@
+	@LIBGCRYPT_LIBS@ @WRAP_LIBS@ @LIBADD_DL@ @PTHREAD_LIBS@ @GSSAPI_LIBS@ @KRB5_LIBS@ @MYSQL_LIBS@
 
 afpd_LDFLAGS = -export-dynamic
 
@@ -58,10 +58,6 @@ if WITH_SPOTLIGHT
 afpd_SOURCES += spotlight.c spotlight_marshalling.c
 afpd_LDADD += $(top_builddir)/etc/spotlight/libspotlight.la @TALLOC_LIBS@
 afpd_CFLAGS += @TRACKER_CFLAGS@ @TALLOC_CFLAGS@
-endif
-
-if HAVE_ACLS
-afpd_SOURCES += acls.c
 endif
 
 if HAVE_DBUS_GLIB
@@ -92,5 +88,5 @@ endif
 
 noinst_HEADERS = auth.h afp_config.h desktop.h directory.h fce_api_internal.h file.h \
 	 filedir.h fork.h icon.h mangle.h misc.h status.h switch.h \
-	 uam_auth.h unix.h volume.h hash.h acls.h acl_mappings.h extattrs.h \
+	 uam_auth.h unix.h volume.h hash.h extattrs.h \
 	 dircache.h afpstats_obj.h afpstats.h
