@@ -230,7 +230,6 @@ AC_CONFIG_FILES([
   bin/cnid/cnid2_create
   bin/misc/Makefile
   config/Makefile
-  config/pam/Makefile
   contrib/Makefile
   contrib/macusers/Makefile
   contrib/macusers/macusers

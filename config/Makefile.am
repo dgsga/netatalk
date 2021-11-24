@@ -1,6 +1,5 @@
 ## Makefile.am for config/
 
-SUBDIRS = pam
 SUFFIXES = .tmpl .
 
 TMPLFILES = afp.conf.tmpl dbus-session.conf.tmpl
