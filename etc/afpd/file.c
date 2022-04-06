@@ -473,7 +473,7 @@ int getmetadata(const AFPObj *obj,
                 data += sizeof( aint );
             }
             else {
-                if ( adp ) {
+                if ( adp && ad_entry(adp, ADEID_FINDERI)) {
                     memcpy(fdType, ad_entry( adp, ADEID_FINDERI ), 4 );
 
                     if ( memcmp( fdType, "TEXT", 4 ) == 0 ) {
@@ -552,11 +552,11 @@ int getmetadata(const AFPObj *obj,
                we have to add S_IFLNK to the mode, otherwise
                10.3 clients freak out. */
 
-    	    aint = st->st_mode;
- 	    if (adp) {
+	    aint = st->st_mode;
+	    if (adp && ad_entry(adp, ADEID_FINDERI)) {
 	        memcpy(fdType, ad_entry( adp, ADEID_FINDERI ), 4 );
                 if ( memcmp( fdType, "slnk", 4 ) == 0 ) {
-	 	    aint |= S_IFLNK;
+		    aint |= S_IFLNK;
             	}
 	    }
             aint = htonl(aint);
@@ -1019,6 +1019,10 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
             ad_setdate(adp, AD_DATE_BACKUP, bdate);
             break;
         case FILPBIT_FINFO :
+            if (!ad_entry(adp, ADEID_FINDERI)) {
+                LOG(log_debug, logtype_afpd, "setfilparams(\"%s\"): invalid FinderInfo", path->u_name);
+                break;
+            }
             if (default_type( ad_entry( adp, ADEID_FINDERI ))
                     && ( 
                      ((em = getextmap( path->m_name )) &&
@@ -1039,8 +1043,10 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
             break;
         case FILPBIT_PDINFO :
             if (obj->afp_version < 30) { /* else it's UTF8 name */
-                memcpy(ad_entry( adp, ADEID_FINDERI ), fdType, 4 );
-                memcpy(ad_entry( adp, ADEID_FINDERI ) + 4, "pdos", 4 );
+                if (ad_entry(adp, ADEID_FINDERI)) {
+                    memcpy(ad_entry( adp, ADEID_FINDERI ), fdType, 4 );
+                    memcpy(ad_entry( adp, ADEID_FINDERI ) + 4, "pdos", 4 );
+                }
                 break;
             }
             /* fallthrough */
