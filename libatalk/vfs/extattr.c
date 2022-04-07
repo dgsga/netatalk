@@ -27,9 +27,7 @@
    Samba 3.0.28, modified for netatalk.
 */
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include <stdlib.h>
 #include <string.h>

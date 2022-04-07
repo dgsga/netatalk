@@ -12,9 +12,7 @@
   GNU General Public License for more details.
 */
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif /* HAVE_CONFIG_H */
 
 #include <string.h>
 #include <stdio.h>
@@ -238,4 +236,3 @@ uint16_t openvol(AFPObj *obj, const char *name)
     memcpy(&vid, p, 2);
     return vid;
 }
-

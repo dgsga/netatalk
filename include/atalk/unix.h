@@ -15,9 +15,7 @@
 #ifndef ATALK_UNIX_H
 #define ATALK_UNIX_H
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
 #include <sys/stat.h>
 #include <sys/types.h>
