@@ -1,7 +1,5 @@
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 /* =========================================================================
 
@@ -531,4 +529,3 @@ void setuplog(const char *logstr, const char *logfile, const bool log_us_timesta
 
     free(save);
 }
-

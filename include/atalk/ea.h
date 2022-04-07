@@ -15,9 +15,7 @@
 #ifndef ATALK_EA_H
 #define ATALK_EA_H
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
 #include <sys/xattr.h>
 
