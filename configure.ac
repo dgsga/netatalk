@@ -182,9 +182,6 @@ AC_NETATALK_LIBEVENT
 dnl Check whether to enable Spotlight support
 AC_NETATALK_SPOTLIGHT
 
-dnl Check for dtrace
-AC_NETATALK_DTRACE
-
 dnl Check for dbus-glib, for AFP stats on dbus
 AC_NETATALK_DBUS_GLIB
 
