@@ -103,9 +103,6 @@ AC_NETATALK_SET_RPATH
 dnl --with-pkgconfdir check to change configuration directory location
 AC_NETATALK_CONFIG_DIRS
 
-dnl Check for optional cracklib support
-AC_NETATALK_CRACKLIB
-
 dnl Check whether to enable debug code
 AC_NETATALK_DEBUG
 
@@ -216,7 +213,6 @@ AC_CONFIG_FILES([
   Makefile
   bin/Makefile
   bin/ad/Makefile
-  bin/afppasswd/Makefile
   bin/cnid/Makefile
   bin/cnid/cnid2_create
   bin/misc/Makefile
@@ -268,7 +264,6 @@ AC_CONFIG_FILES([
   man/man1/Makefile
   man/man1/ad.1
   man/man1/afpldaptest.1
-  man/man1/afppasswd.1
   man/man1/afpstats.1
   man/man1/apple_dump.1
   man/man1/asip-status.1
