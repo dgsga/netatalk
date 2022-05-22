@@ -15,7 +15,6 @@
 <!ENTITY afp_signature.conf.5 SYSTEM "../manpages//man5/afp_signature.conf.5.xml">
 <!ENTITY afp_voluuid.conf.5 SYSTEM "../manpages//man5/afp_voluuid.conf.5.xml">
 <!ENTITY afpldaptest.1 SYSTEM "../manpages//man1/afpldaptest.1.xml">
-<!ENTITY afppasswd.1 SYSTEM "../manpages//man1/afppasswd.1.xml">
 <!ENTITY afpstats.1 SYSTEM "../manpages//man1/afpstats.1.xml">
 <!ENTITY apple_dump.1 SYSTEM "../manpages//man1/apple_dump.1.xml">
 <!ENTITY extmap.conf.5 SYSTEM "../manpages//man5/extmap.conf.5.xml">
