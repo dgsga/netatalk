@@ -25,21 +25,6 @@ AC_DEFUN([AC_NETATALK_ZEROCONF], [
 			zeroconf_dir="$zeroconf"
 		fi
 
-        # mDNS support using Avahi
-        PKG_CHECK_MODULES(AVAHI, [avahi-client >= 0.6], ac_cv_have_avahi=yes, ac_cv_have_avahi=no)
-        if test x"$ac_cv_have_avahi" = x"yes" ; then
-          PKG_CHECK_MODULES(AVAHI_TPOLL, [avahi-client >= 0.6.4],
-            [AC_DEFINE(HAVE_AVAHI_THREADED_POLL, 1, [Uses Avahis threaded poll implementation])],
-            [AC_MSG_WARN(This Avahi implementation is not supporting threaded poll objects. Maybe this is not what you want.)])
-          ZEROCONF_LIBS="$AVAHI_LIBS"
-          ZEROCONF_CFLAGS="$AVAHI_CFLAGS"
-          AC_DEFINE(USE_ZEROCONF, 1, [Use DNS-SD registration])
-          AC_DEFINE(HAVE_AVAHI, 1, [Use Avahi/DNS-SD registration])
-          found_zeroconf=yes
-        fi
-        CPPFLAGS="$savedcppflags"
-        LDFLAGS="$savedldflags"
-
         # mDNS support using mDNSResponder
         if test x"$found_zeroconf" != x"yes" ; then
             AC_CHECK_HEADER(
