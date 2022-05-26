@@ -27,11 +27,10 @@
 static struct itimerval itimer;
 
 /* this creates an open lock file which hangs around until the program
- * dies. it returns the pid. due to problems w/ solaris, this has
+ * dies. it returns the pid. due to problems w/ Solaris, this has
  * been changed to do the kill() thing. */
 pid_t server_lock(char *program, char *pidfile, int debug)
 {
-#ifndef SOLARIS
   char buf[10];
   FILE *pf;
   pid_t pid;
@@ -74,15 +73,8 @@ pid_t server_lock(char *program, char *pidfile, int debug)
       i = open( "/dev/null", O_RDWR );
       i = open( "/dev/null", O_RDWR );
 
-#ifdef TIOCNOTTY
-      if (( i = open( "/dev/tty", O_RDWR )) >= 0 ) {
-	(void)ioctl( i, TIOCNOTTY, 0 );
-	setpgid( 0, getpid());
-	(void) close(i);
-      }
-#else
       setpgid( 0, getpid());
-#endif
+
       break;
     case -1 :  /* error */
       perror( "fork" );
@@ -94,7 +86,6 @@ pid_t server_lock(char *program, char *pidfile, int debug)
   fprintf(pf, "%d\n", getpid());
   fclose(pf);
   }
-#endif
   return 0;
 }
 
@@ -103,7 +94,6 @@ pid_t server_lock(char *program, char *pidfile, int debug)
  */
 int check_lockfile(const char *program, const char *pidfile)
 {
-#ifndef SOLARIS
     char buf[10];
     FILE *pf;
     pid_t pid;
@@ -118,7 +108,6 @@ int check_lockfile(const char *program, const char *pidfile)
         }
         fclose(pf);
     }
-#endif
     return 0;
 }
 
@@ -127,7 +116,6 @@ int check_lockfile(const char *program, const char *pidfile)
  */
 int create_lockfile(const char *program, const char *pidfile)
 {
-#ifndef SOLARIS
     FILE *pf;
     int mask;
 
@@ -144,6 +132,5 @@ int create_lockfile(const char *program, const char *pidfile)
     umask(mask);
     fprintf(pf, "%d\n", getpid());
     fclose(pf);
-#endif
     return 0;
 }
