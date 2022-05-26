@@ -744,30 +744,9 @@ neta_cv_eas="ad"
 neta_cv_eas_sys_found=no
 neta_cv_eas_sys_not_found=no
 
-AC_CHECK_HEADERS(sys/attributes.h sys/attr.h attr/xattr.h sys/xattr.h sys/extattr.h sys/uio.h sys/ea.h)
+AC_CHECK_HEADERS(sys/xattr.h sys/uio.h)
 
 case "$this_os" in
-
-  *solaris*)
-	AC_DEFINE(HAVE_EAFD, 1, [extattr API has full fledged fds for EAs])
-	neta_cv_eas_sys_found=yes
-  ;;
-
-  'freebsd')
-    AC_CHECK_FUNCS([extattr_delete_fd extattr_delete_file extattr_delete_link],
-                   [neta_cv_eas_sys_found=yes],
-                   [neta_cv_eas_sys_not_found=yes])
-    AC_CHECK_FUNCS([extattr_get_fd extattr_get_file extattr_get_link],,
-                   [neta_cv_eas_sys_not_found=yes])
-    AC_CHECK_FUNCS([extattr_list_fd extattr_list_file extattr_list_link],,
-                   [neta_cv_eas_sys_not_found=yes])
-    AC_CHECK_FUNCS([extattr_set_fd extattr_set_file extattr_set_link],,
-                   [neta_cv_eas_sys_not_found=yes])
-  ;;
-
-  *freebsd4* | *dragonfly* )
-    AC_DEFINE(BROKEN_EXTATTR, 1, [Does extattr API work])
-  ;;
 
   *macosx*)
 	AC_SEARCH_LIBS(getxattr, [attr])
@@ -781,35 +760,6 @@ case "$this_os" in
                       [neta_cv_eas_sys_not_found=yes])
     fi
   ;;
-
-  *)
-	AC_SEARCH_LIBS(getxattr, [attr])
-
-    if test "x$neta_cv_eas_sys_found" != "xyes" ; then
-       AC_CHECK_FUNCS([getxattr lgetxattr fgetxattr listxattr llistxattr],
-                      [neta_cv_eas_sys_found=yes],
-                      [neta_cv_eas_sys_not_found=yes])
-	   AC_CHECK_FUNCS([flistxattr removexattr lremovexattr fremovexattr],,
-                      [neta_cv_eas_sys_not_found=yes])
-	   AC_CHECK_FUNCS([setxattr lsetxattr fsetxattr],,
-                      [neta_cv_eas_sys_not_found=yes])
-    fi
-
-    if test "x$neta_cv_eas_sys_found" != "xyes" ; then
-	   AC_CHECK_FUNCS([getea fgetea lgetea listea flistea llistea],
-                      [neta_cv_eas_sys_found=yes],
-                      [neta_cv_eas_sys_not_found=yes])
-	   AC_CHECK_FUNCS([removeea fremoveea lremoveea setea fsetea lsetea],,
-                      [neta_cv_eas_sys_not_found=yes])
-    fi
-
-    if test "x$neta_cv_eas_sys_found" != "xyes" ; then
-	   AC_CHECK_FUNCS([attr_get attr_list attr_set attr_remove],,
-                      [neta_cv_eas_sys_not_found=yes])
-       AC_CHECK_FUNCS([attr_getf attr_listf attr_setf attr_removef],,
-                      [neta_cv_eas_sys_not_found=yes])
-    fi
-  ;;
 esac
 
 # Do xattr functions take additional options like on Darwin?
@@ -819,11 +769,7 @@ if test x"$ac_cv_func_getxattr" = x"yes" ; then
 		LIBS="$LIBS"
 		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 			#include <sys/types.h>
-			#if HAVE_ATTR_XATTR_H
-			#include <attr/xattr.h>
-			#elif HAVE_SYS_XATTR_H
 			#include <sys/xattr.h>
-			#endif
 		]], [[
 			getxattr(0, 0, 0, 0, 0, 0);
 		]])],[smb_attr_cv_xattr_add_opt=yes],[smb_attr_cv_xattr_add_opt=no;LIBS=$old_LIBS])
