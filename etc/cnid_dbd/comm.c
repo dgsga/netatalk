@@ -26,7 +26,6 @@
 #include <atalk/logger.h>
 #include <atalk/util.h>
 #include <atalk/cnid_bdb_private.h>
-#include <atalk/compat.h>
 
 #include "db_param.h"
 #include "usockfd.h"

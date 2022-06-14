@@ -1,6 +1,6 @@
 # Makefile.am for libatalk/
 
-SUBDIRS = acl adouble bstring compat cnid dsi iniparser util unicode vfs
+SUBDIRS = acl adouble bstring cnid dsi iniparser util unicode vfs
 
 lib_LTLIBRARIES = libatalk.la
 
@@ -15,7 +15,6 @@ libatalk_la_LIBADD  = \
 	adouble/libadouble.la	\
 	bstring/libbstring.la \
 	cnid/libcnid.la \
-	compat/libcompat.la	\
 	dsi/libdsi.la		\
 	iniparser/libiniparser.la \
 	unicode/libunicode.la \
@@ -27,7 +26,6 @@ libatalk_la_DEPENDENCIES = \
 	adouble/libadouble.la	\
 	bstring/libbstring.la \
 	cnid/libcnid.la \
-	compat/libcompat.la	\
 	dsi/libdsi.la		\
 	iniparser/libiniparser.la \
 	unicode/libunicode.la \
