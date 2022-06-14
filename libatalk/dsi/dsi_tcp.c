@@ -41,7 +41,6 @@ int deny_severity = log_warning;
 #endif /* TCPWRAP */
 
 #include <atalk/dsi.h>
-#include <atalk/compat.h>
 #include <atalk/util.h>
 #include <atalk/errchk.h>
 

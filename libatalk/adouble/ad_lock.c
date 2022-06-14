@@ -22,7 +22,6 @@
 
 #include <atalk/adouble.h>
 #include <atalk/logger.h>
-#include <atalk/compat.h>
 #include <atalk/errchk.h>
 #include <atalk/util.h>
 

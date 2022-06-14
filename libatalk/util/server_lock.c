@@ -21,7 +21,6 @@
 
 #include <sys/time.h>
 
-#include <atalk/compat.h>
 #include <atalk/util.h>
 
 static struct itimerval itimer;

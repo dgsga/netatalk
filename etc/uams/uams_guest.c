@@ -17,7 +17,6 @@
 #include <atalk/afp.h>
 #include <atalk/uam.h>
 #include <atalk/util.h>
-#include <atalk/compat.h>
 
 #ifndef MIN
 #define MIN(a,b) ((a) < (b) ? (a) : (b))

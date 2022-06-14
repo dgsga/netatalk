@@ -28,7 +28,6 @@
 #include <atalk/logger.h>
 #include <atalk/uam.h>
 #include <atalk/util.h>
-#include <atalk/compat.h>
 #include <atalk/standards.h>
 
 #define PASSWDLEN 8
