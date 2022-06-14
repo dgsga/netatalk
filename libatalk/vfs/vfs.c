@@ -40,7 +40,6 @@
 #include <atalk/errchk.h>
 #include <atalk/bstrlib.h>
 #include <atalk/bstradd.h>
-#include <atalk/compat.h>
 
 struct perm {
     uid_t uid;

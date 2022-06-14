@@ -40,7 +40,6 @@
 #include <atalk/vfs.h>
 #include <atalk/util.h>
 #include <atalk/unix.h>
-#include <atalk/compat.h>
 #include <atalk/errchk.h>
 #include <atalk/acl.h>
 

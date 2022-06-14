@@ -27,7 +27,6 @@
 #include <atalk/list.h>
 #include <atalk/logger.h>
 #include <atalk/util.h>
-#include <atalk/compat.h>
 #include <atalk/volume.h>
 
 /* List of all registered modules. */

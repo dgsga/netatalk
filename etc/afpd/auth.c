@@ -15,7 +15,6 @@
 #include <arpa/inet.h>
 
 #include <atalk/afp.h>
-#include <atalk/compat.h>
 #include <atalk/util.h>
 #include <limits.h>
 #include <string.h>
