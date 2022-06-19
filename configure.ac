@@ -164,9 +164,6 @@ AC_NETATALK_LIBEVENT
 dnl Check for dbus-glib, for AFP stats on dbus
 AC_NETATALK_DBUS_GLIB
 
-dnl FHS stuff has to be done last because it overrides other defaults
-AC_NETATALK_FHS
-
 dnl netatalk lockfile path, must come after AC_NETATALK_FHS
 AC_NETATALK_LOCKFILE
 
