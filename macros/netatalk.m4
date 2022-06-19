@@ -335,12 +335,6 @@ if test x"$this_os" = "xsolaris"; then
 	init_style=solaris
 fi
 
-dnl Whether to run ldconfig after installing libraries
-AC_PATH_PROG(NETA_LDCONFIG, ldconfig, , [$PATH$PATH_SEPARATOR/sbin$PATH_SEPARATOR/bin$PATH_SEPARATOR/usr/sbin$PATH_SEPARATOR/usr/bin])
-echo NETA_LDCONFIG = $NETA_LDCONFIG
-AM_CONDITIONAL(RUN_LDCONFIG, test x"$this_os" = x"linux" -a x"$NETA_LDCONFIG" != x"")
-])
-
 dnl Check whether to enable rpath (the default on Solaris and NetBSD)
 AC_DEFUN([AC_NETATALK_SET_RPATH], [
 	AS_CASE("$this_os", [solaris|netbsd],
