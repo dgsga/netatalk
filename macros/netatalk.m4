@@ -148,14 +148,8 @@ AC_DEFUN([AC_NETATALK_LOCKFILE], [
             ac_cv_netatalk_lock=/var/run/netatalk.pid
         else
             case "$host_os" in
-            *freebsd*)
-                ac_cv_netatalk_lock=/var/spool/lock/netatalk
-                ;;
-            *netbsd*|*openbsd*|*darwin*)
+            *darwin*)
                 ac_cv_netatalk_lock=/var/run/netatalk.pid
-                ;;
-            *linux*)
-                ac_cv_netatalk_lock=/var/lock/netatalk
                 ;;
             esac
         fi
