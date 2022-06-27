@@ -23,9 +23,6 @@
 #include <atalk/globals.h>
 #include <atalk/fce_api.h>
 #include <atalk/netatalk_conf.h>
-#ifdef WITH_SPOTLIGHT
-#include <atalk/spotlight.h>
-#endif
 #include <atalk/dsi.h>
 
 #include "directory.h"
@@ -1022,7 +1019,7 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
                 break;
             }
             if (default_type( ad_entry( adp, ADEID_FINDERI ))
-                    && ( 
+                    && (
                      ((em = getextmap( path->m_name )) &&
                       !memcmp(finder_buf, em->em_type, sizeof( em->em_type )) &&
                       !memcmp(finder_buf + 4, em->em_creator,sizeof( em->em_creator)))
@@ -1824,7 +1821,7 @@ retry:
 	if (errno == ESTALE) {
 	    errno = ENOENT;
 	}
-#endif	
+#endif
 	if ( errno == ENOENT && !retry) {
 	    /* cnid db is out of sync, reenumerate the directory and update ids */
 	    reenumerate_id(vol, ".", dir);
@@ -1923,7 +1920,7 @@ int afp_deleteid(AFPObj *obj _U_, char *ibuf, size_t ibuflen _U_, char *rbuf _U_
             return AFPERR_ACCESS;
 #ifdef ESTALE
 	case ESTALE:
-#endif	
+#endif
         case ENOENT:
             /* still try to delete the id */
             err = AFPERR_NOOBJ;

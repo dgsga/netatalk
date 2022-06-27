@@ -24,7 +24,6 @@
 #include <dbus/dbus-glib.h>
 
 #include <atalk/logger.h>
-#include <atalk/compat.h>
 #include <atalk/errchk.h>
 #include <atalk/server_child.h>
 

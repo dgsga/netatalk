@@ -2,8 +2,8 @@
 
 SUFFIXES = .tmpl .
 
-TMPLFILES = afp.conf.tmpl dbus-session.conf.tmpl
-GENFILES = afp.conf dbus-session.conf
+TMPLFILES = afp.conf.tmpl
+GENFILES = afp.conf
 CLEANFILES = $(GENFILES)
 EXTRA_DIST = $(TMPLFILES) extmap.conf netatalk-dbus.conf
 
@@ -45,7 +45,6 @@ uninstall-local:
 		echo rm -f $(DESTDIR)$(pkgconfdir)/$$f; \
 		rm -f $(DESTDIR)$(pkgconfdir)/$$f; \
 	done
-	rm -f $(DESTDIR)$(pkgconfdir)/dbus-session.conf
 	rm -f $(DESTDIR)$(localstatedir)/netatalk/README
 	rm -f $(DESTDIR)$(localstatedir)/netatalk/CNID/README
 

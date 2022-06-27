@@ -45,7 +45,6 @@ noinst_HEADERS = \
 	talloc.h \
 	dalloc.h \
 	byteorder.h \
-	fce_api.h \
-	spotlight.h
+	fce_api.h
 
 EXTRA_DIST = afp_dtrace.d

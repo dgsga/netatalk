@@ -138,12 +138,8 @@ static void show_version_extended(void )
 	puts( "No" );
 #endif
 
-	printf( "     Spotlight support:\t" );
-#ifdef WITH_SPOTLIGHT
-	puts( "Yes" );
-#else
-	puts( "No" );
-#endif
+    printf( "     Spotlight support:\t" );
+    puts( "Native" );
 }
 
 /*
