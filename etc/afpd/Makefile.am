@@ -38,7 +38,6 @@ afpd_SOURCES = \
 	unix.c \
 	volume.c
 
-
 afpd_LDADD =  \
 	$(top_builddir)/libatalk/libatalk.la \
 	@LIBGCRYPT_LIBS@ @WRAP_LIBS@ @LIBADD_DL@ @PTHREAD_LIBS@ @GSSAPI_LIBS@ @KRB5_LIBS@ @MYSQL_LIBS@
@@ -52,12 +51,6 @@ afpd_CFLAGS = \
 	-D_PATH_AFPDUAMPATH=\"$(UAMS_PATH)/\" \
 	-D_PATH_CONFDIR=\"$(pkgconfdir)/\" \
 	-D_PATH_STATEDIR='"$(localstatedir)/netatalk/"'
-
-if WITH_SPOTLIGHT
-afpd_SOURCES += spotlight.c spotlight_marshalling.c
-afpd_LDADD += $(top_builddir)/etc/spotlight/libspotlight.la @TALLOC_LIBS@
-afpd_CFLAGS += @TRACKER_CFLAGS@ @TALLOC_CFLAGS@
-endif
 
 if HAVE_DBUS_GLIB
 BUILT_SOURCES += afpstats_service_glue.h

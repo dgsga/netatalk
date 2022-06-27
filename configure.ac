@@ -179,9 +179,6 @@ AC_NETATALK_RECVFILE
 dnl Check for libevent
 AC_NETATALK_LIBEVENT
 
-dnl Check whether to enable Spotlight support
-AC_NETATALK_SPOTLIGHT
-
 dnl Check for dbus-glib, for AFP stats on dbus
 AC_NETATALK_DBUS_GLIB
 
@@ -254,7 +251,6 @@ AC_CONFIG_FILES([
   etc/afpd/Makefile
   etc/cnid_dbd/Makefile
   etc/netatalk/Makefile
-  etc/spotlight/Makefile
   etc/uams/Makefile
   include/Makefile
   include/atalk/Makefile
