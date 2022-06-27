@@ -33,10 +33,3 @@ libatalk_la_DEPENDENCIES = \
 	unicode/libunicode.la \
 	util/libutil.la		\
 	vfs/libvfs.la
-	
-if WITH_SPOTLIGHT
-SUBDIRS += talloc
-libatalk_la_LIBADD += talloc/libtalloc.la
-libatalk_la_DEPENDENCIES += talloc/libtalloc.la 
-endif
-
