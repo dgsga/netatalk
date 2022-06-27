@@ -41,8 +41,6 @@ noinst_HEADERS = \
 	ftw.h \
 	dsi.h \
 	ldapconfig.h \
-	talloc.h \
-	dalloc.h \
 	byteorder.h \
 	fce_api.h
 

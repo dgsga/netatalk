@@ -254,7 +254,6 @@ AC_CONFIG_FILES([
   libatalk/cnid/mysql/Makefile
   libatalk/dsi/Makefile
   libatalk/iniparser/Makefile
-  libatalk/talloc/Makefile
   libatalk/unicode/Makefile
   libatalk/unicode/charsets/Makefile
   libatalk/util/Makefile
