@@ -18,7 +18,7 @@ dnl	# check for libiconv support
 	    ;;
 	  *)
 	    ICONV_CFLAGS="-I$withval/include"
-	    ICONV_LIBS="-L$withval/$atalk_libname"
+	    ICONV_LIBS="-L$withval/lib"
 	    ;;
 	  esac ],
 	  withval="no"
