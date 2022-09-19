@@ -1,4 +1,4 @@
-dnl Autoconf macro to check for kerberos
+dnl Autoconf macro to check for Kerberos V
 
 AC_DEFUN([NETATALK_GSSAPI_CHECK],
 [
@@ -19,7 +19,7 @@ AC_DEFUN([NETATALK_GSSAPI_CHECK],
     if test x"$compilegssapi" != x"no" ; then
         if test "x$compilegssapi" != "xyes" -a "x$compilegssapi" != "xauto" ; then
             export CFLAGS="$CFLAGS -I$withval/include"
-            export LDFLAGS="$LDFLAGS -L$withval/${atalk_libname}"
+            export LDFLAGS="$LDFLAGS -L$withval/lib"
             AC_MSG_NOTICE([checking for GSSAPI support in $compilegssapi])
         fi
 
