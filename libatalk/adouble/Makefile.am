@@ -8,12 +8,12 @@ libadouble_la_SOURCES = \
 	ad_date.c \
 	ad_flush.c \
 	ad_lock.c \
-	ad_mmap.c \
 	ad_open.c \
 	ad_read.c \
-	ad_recvfile.c \
-	ad_sendfile.c \
 	ad_size.c \
 	ad_write.c
+
+# ad_recvfile.c
+# ad_sendfile.c
 
 noinst_HEADERS = ad_lock.h
