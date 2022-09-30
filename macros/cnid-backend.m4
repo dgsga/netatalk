@@ -1,9 +1,13 @@
+# AC_NETATALK_CNID
+# ----------------
+# Autoconf macro to determine which CNID backends to use.
+
 AC_DEFUN([AC_NETATALK_CNID], [
     dnl Don't use BDB unless it's needed
     bdb_required=no
     compiled_backends=""
 
-    dnl Determine whether or not to use Database Daemon CNID backend
+    # Determine whether or not to use Database Daemon CNID backend
     AC_MSG_CHECKING([whether or not to use Database Daemon CNID backend])
     AC_ARG_WITH(cnid-dbd-backend,
     [  --with-cnid-dbd-backend       build CNID with Database Daemon Data Store [[yes]]],
@@ -29,7 +33,7 @@ AC_DEFUN([AC_NETATALK_CNID], [
     fi
     AM_CONDITIONAL(BUILD_DBD_DAEMON, test x"$use_dbd_backend" = x"yes")
 
-    dnl Determine whether or not to use LAST DID scheme
+    # Determine whether or not to use LAST DID scheme
     AC_MSG_CHECKING([whether or not to use LAST DID scheme])
     AC_ARG_WITH(cnid-last-backend,
 	[  --with-cnid-last-backend	build LAST CNID scheme                     [[yes]]],
@@ -55,7 +59,7 @@ AC_DEFUN([AC_NETATALK_CNID], [
     fi
     AM_CONDITIONAL(USE_LAST_BACKEND, test x"$use_last_backend" = x"yes")
 
-    dnl Check for mysql CNID backend
+    # Check for mysql CNID backend
     AC_ARG_VAR(MYSQL_CFLAGS, [C compiler flags for MySQL, overriding checks])
     AC_ARG_VAR(MYSQL_LIBS, [linker flags for MySQL, overriding checks])
 
@@ -90,7 +94,7 @@ AC_DEFUN([AC_NETATALK_CNID], [
     AC_SUBST(MYSQL_LIBS)
     AM_CONDITIONAL(USE_MYSQL_BACKEND, test x"$ac_cv_with_cnid_mysql" = x"yes")
 
-    dnl Set default DID scheme
+    # Set default DID scheme
     AC_MSG_CHECKING([default DID scheme])
     AC_ARG_WITH(cnid-default-backend,
 	[  --with-cnid-default-backend=val	set default DID scheme [[dbd]]],
