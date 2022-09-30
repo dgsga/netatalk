@@ -71,9 +71,6 @@ AC_DEFINE(OPEN_NOFOLLOW_ERRNO, ELOOP, errno returned by open with O_NOFOLLOW)
 # Pthread support
 AX_PTHREAD(, [AC_MSG_ERROR([missing pthread_sigmask])])
 
-# OS specific checks
-AC_NETATALK_OS_SPECIFIC
-
 # Whether to set rpath
 AC_NETATALK_SET_RPATH
 

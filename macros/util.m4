@@ -1,4 +1,7 @@
-dnl Removes -I/usr/include/? from given variable
+# CFLAGS_REMOVE_USR_INCLUDE
+# -------------------------
+# Removes -I/usr/include/? from given variable.
+
 AC_DEFUN([CFLAGS_REMOVE_USR_INCLUDE],[
   ac_new_flags=""
   for i in [$]$1; do

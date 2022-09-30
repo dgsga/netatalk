@@ -1,4 +1,6 @@
-dnl Autoconf macro to set the configuration directories.
+# AC_NETATALK_CONFIG_DIRS
+# -----------------------
+# Autoconf macro to set the configuration directories.
 
 AC_DEFUN([AC_NETATALK_CONFIG_DIRS], [
 	PKGCONFDIR="${sysconfdir}"

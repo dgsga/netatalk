@@ -1,8 +1,9 @@
+# AC_NETATALK_CHECK_ICONV
+# -----------------------
+# Autoconf macro to check for libiconv.
+
 AC_DEFUN([AC_NETATALK_CHECK_ICONV],
 [
-
-dnl	#################################################
-dnl	# check for libiconv support
 	saved_CPPFLAGS="$CPPFLAGS"
         savedcflags="$CFLAGS"
         savedldflags="$LDFLAGS"
@@ -53,7 +54,7 @@ int main(void) {
 	if test x"$netatalk_cv_iconv" = x"yes"; then
 	    ICONV_LIBS="$ICONV_LIBS -liconv"
         else
-dnl	    # unset C-/LDFLAGS so we can detect glibc iconv, if available
+# unset C-/LDFLAGS so we can detect glibc iconv, if available
 	    CFLAGS="$savedcflags"
 	    LDFLAGS="$savedldflags"
 	    ICONV_LIBS=""
@@ -69,8 +70,7 @@ dnl	    # unset C-/LDFLAGS so we can detect glibc iconv, if available
 	AC_SUBST(ICONV_CFLAGS)
 	AC_SUBST(ICONV_LIBS)
 
-dnl	############
-dnl	# check for iconv usability
+# check for iconv usability
 
 	AC_CACHE_CHECK([for working iconv],netatalk_cv_HAVE_USABLE_ICONV,[
 		AC_RUN_IFELSE([AC_LANG_SOURCE([[
@@ -86,8 +86,7 @@ int main(void) {
 	    AC_DEFINE(HAVE_USABLE_ICONV,1,[Whether to use native iconv])
 	fi
 
-dnl	###########
-dnl	# check if iconv needs const
+# check if iconv needs const
   	if test x"$netatalk_cv_HAVE_USABLE_ICONV" = x"yes"; then
     		AC_CACHE_VAL(am_cv_proto_iconv, [
       		AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
@@ -108,8 +107,7 @@ size_t iconv();
       			[Define as const if the declaration of iconv() needs const.])
   	fi
 
-dnl     ###########
-dnl     # check if (lib)iconv supports UCS-2-INTERNAL
+# check if (lib)iconv supports UCS-2-INTERNAL
 	if test x"$netatalk_cv_HAVE_USABLE_ICONV" = x"yes"; then
 	    AC_CACHE_CHECK([whether iconv supports UCS-2-INTERNAL],netatalk_cv_HAVE_UCS2INTERNAL,[
 		AC_RUN_IFELSE([AC_LANG_SOURCE([[
