@@ -115,7 +115,7 @@ static void usage (void)
 
 void dbd_log(enum logtype lt, char *fmt, ...)
 {
-    int len;
+    int len _U_;
     static char logbuffer[1024];
     va_list args;
 
