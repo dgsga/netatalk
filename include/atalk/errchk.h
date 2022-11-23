@@ -15,7 +15,7 @@
 #ifndef ERRCHECK_H
 #define ERRCHECK_H
 
-#define EC_INIT int ret = 0
+#define EC_INIT int ret _U_ = 0
 #define EC_STATUS(a) ret = (a)
 #define EC_EXIT_STATUS(a) do { ret = (a); goto cleanup; } while (0)
 #define EC_FAIL do { ret = -1; goto cleanup; } while (0)
