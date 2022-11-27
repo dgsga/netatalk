@@ -19,11 +19,11 @@
 
 #include <sys/xattr.h>
 
+#include <atalk/vfs.h>
+
 #ifndef ENOATTR
 #define ENOATTR ENODATA
 #endif
-
-#include <atalk/vfs.h>
 
 /*
  * This seems to be the current limit fo HFS+, we arbitrarily force that
