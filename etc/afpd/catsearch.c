@@ -26,37 +26,36 @@
 
 #include "config.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <ctype.h>
+#include <errno.h>
+#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
 #include <string.h>
 #include <sys/file.h>
-#include <netinet/in.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
 
-#include <atalk/afp.h>
 #include <atalk/adouble.h>
-#include <atalk/logger.h>
+#include <atalk/afp.h>
+#include <atalk/bstradd.h>
 #include <atalk/cnid.h>
 #include <atalk/cnid_bdb_private.h>
-#include <atalk/util.h>
-#include <atalk/bstradd.h>
-#include <atalk/unicode.h>
 #include <atalk/globals.h>
+#include <atalk/logger.h>
 #include <atalk/netatalk_conf.h>
+#include <atalk/unicode.h>
+#include <atalk/util.h>
 
 #include "desktop.h"
-#include "directory.h"
 #include "dircache.h"
+#include "directory.h"
 #include "file.h"
-#include "volume.h"
 #include "filedir.h"
 #include "fork.h"
+#include "volume.h"
 
 
 struct finderinfo {
@@ -90,9 +89,9 @@ struct scrit {
 	uint32_t rbitmap;          /* Request bitmap - which values should we check ? */
 	uint16_t fbitmap, dbitmap; /* file & directory bitmap - which values should we return ? */
 	uint16_t attr;             /* File attributes */
-	time_t cdate;               /* Creation date */
-	time_t mdate;               /* Last modification date */
-	time_t bdate;               /* Last backup date */
+	time_t cdate;              /* Creation date */
+	time_t mdate;              /* Last modification date */
+	time_t bdate;              /* Last backup date */
 	uint32_t pdid;             /* Parent DID */
     uint16_t offcnt;           /* Offspring count */
 	struct finderinfo finfo;    /* Finder info */
@@ -115,10 +114,10 @@ struct dsitem {
 
 
 #define DS_BSIZE 128
-static int save_cidx = -1; /* Saved index of currently scanned directory. */
+static int save_cidx = -1;           /* Saved index of currently scanned directory. */
 static struct dsitem *dstack = NULL; /* Directory stack data... */
-static int dssize = 0;  	     /* Directory stack (allocated) size... */
-static int dsidx = 0;   	     /* First free item index... */
+static int dssize = 0;  	         /* Directory stack (allocated) size... */
+static int dsidx = 0;   	         /* First free item index... */
 static struct scrit c1, c2;          /* search criteria */
 
 /* Clears directory stack. */
@@ -139,7 +138,7 @@ static int addstack(char *uname _U_, struct dir *dir, int pidx _U_)
 	/* check if we have some space on stack... */
 	if (dsidx >= dssize) {
 		dssize += DS_BSIZE;
-		tmpds = realloc(dstack, dssize * sizeof(struct dsitem));	
+		tmpds = realloc(dstack, dssize * sizeof(struct dsitem));
 		if (tmpds == NULL) {
             clearstack();
             free(dstack);
@@ -181,10 +180,10 @@ static int reducestack(void)
 static struct adouble *adl_lkup(struct vol *vol, struct path *path, struct adouble *adp)
 {
 	static struct adouble ad;
-	
+
 	struct ofork *of;
 	int isdir;
-	
+
 	if (adp)
 	    return adp;
 	
@@ -223,7 +222,7 @@ unpack_finderinfo(struct vol *vol, struct path *path, struct adouble **adp, stru
 {
 	packed_finder  buf;
 	void           *ptr;
-	
+
     *adp = adl_lkup(vol, path, *adp);
 	ptr = get_finderinfo(vol, path->u_name, *adp, &buf,islnk);
 	return unpack_buffer(finfo, ptr);
@@ -267,7 +266,7 @@ static int crit_check(struct vol *vol, struct path *path) {
         	/*retry with the right id */
 
         	cnid_t id;
-        	
+
         	adp = adl_lkup(vol, path, adp);
         	id = get_id(vol, adp, &path->st, path->d_dir->d_did, path->u_name, strlen(path->u_name));
         	if (!id) {
@@ -328,7 +327,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 		if (path->st.st_mtime < c1.mdate || path->st.st_mtime > c2.mdate)
 			goto crit_check_ret;
 	}
-	
+
 	/* Check for creation date... */
 	if ((c1.rbitmap & (1<<DIRPBIT_CDATE))) {
 		c_date = path->st.st_mtime;
@@ -350,7 +349,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 		if (b_date < c1.bdate || b_date > c2.bdate)
 			goto crit_check_ret;
 	}
-				
+
 	/* Check attributes */
 	if ((c1.rbitmap & (1<<DIRPBIT_ATTR)) && c2.attr != 0) {
 		if ((adp = adl_lkup(vol, path, adp))) {
@@ -359,7 +358,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 				goto crit_check_ret;
 		} else
 			goto crit_check_ret;
-	}		
+	}
 
         /* Check file type ID */
 	if ((c1.rbitmap & (1<<DIRPBIT_FINFO)) && c2.finfo.f_type != 0) {
@@ -367,7 +366,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 		if (finfo->f_type != c1.finfo.f_type)
 			goto crit_check_ret;
 	}
-	
+
 	/* Check creator ID */
 	if ((c1.rbitmap & (1<<DIRPBIT_FINFO)) && c2.finfo.creator != 0) {
 		if (!finfo) {
@@ -376,7 +375,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 		if (finfo->creator != c1.finfo.creator)
 			goto crit_check_ret;
 	}
-		
+
 	/* Check finder info attributes */
 	if ((c1.rbitmap & (1<<DIRPBIT_FINFO)) && c2.finfo.attrs != 0) {
 		if (!finfo) {
@@ -386,7 +385,7 @@ static int crit_check(struct vol *vol, struct path *path) {
 		if ((finfo->attrs & c2.finfo.attrs) != c1.finfo.attrs)
 			goto crit_check_ret;
 	}
-	
+
 	/* Check label */
 	if ((c1.rbitmap & (1<<DIRPBIT_FINFO)) && c2.finfo.label != 0) {
 		if (!finfo) {
@@ -394,9 +393,9 @@ static int crit_check(struct vol *vol, struct path *path) {
 		}
 		if ((finfo->label & c2.finfo.label) != c1.finfo.label)
 			goto crit_check_ret;
-	}	
+	}
 	/* FIXME: Attributes check ! */
-	
+
 	/* All criteria are met. */
 	result |= 1;
 crit_check_ret:
@@ -427,7 +426,7 @@ static int rslt_add (const AFPObj *obj, struct vol *vol, struct path *path, char
 	if (ext) {
 		*p++ = 0;                  /* Pad */
 	}
-	
+
 	if ( isdir ) {
         ret = getdirparams(obj, vol, c1.dbitmap, path, path->d_dir, p , &tbuf );
 	}
@@ -487,8 +486,8 @@ static int catsearch(const AFPObj *obj,
                      int ext)
 {
     static uint32_t cur_pos;    /* Saved position index (ID) - used to remember "position" across FPCatSearch calls */
-    static DIR *dirpos; 		 /* UNIX structure describing currently opened directory. */
-    struct dir *currentdir;      /* struct dir of current directory */
+    static DIR *dirpos; 		/* UNIX structure describing currently opened directory. */
+    struct dir *currentdir;     /* struct dir of current directory */
 	int cidx, r;
 	struct dirent *entry;
 	int result = AFP_OK;
@@ -530,7 +529,7 @@ static int catsearch(const AFPObj *obj,
         result = AFPERR_MISC;
         goto catsearch_end;
     }
-	
+
 	/* So we are beginning... */
     start_time = time(NULL);
 
@@ -567,7 +566,7 @@ static int catsearch(const AFPObj *obj,
 			goto catsearch_end;
 		}
 
-		
+
 		while ((entry = readdir(dirpos)) != NULL) {
 			(*pos)++;
 
@@ -616,7 +615,7 @@ static int catsearch(const AFPObj *obj,
 					}
                 }
                 path.m_name = cfrombstr(path.d_dir->d_m_name);
-                	
+
 				if (addstack(path.u_name, path.d_dir, cidx) == -1) {
 					result = AFPERR_MISC;
 					goto catsearch_end;
@@ -634,7 +633,7 @@ static int catsearch(const AFPObj *obj,
 			/* bit 0 means that criteria has been met */
 			if ((ccr & 1)) {
 				r = rslt_add (obj, vol, &path, &rrbuf, ext);
-				
+
 				if (r == 0) {
 					result = AFPERR_MISC;
 					goto catsearch_end;
@@ -752,7 +751,7 @@ static int catsearch_db(const AFPObj *obj,
             goto catsearch_end;
         }
     }
-	
+
 	while ((int)cur_pos < num_matches) {
         char *name;
         cnid_t cnid, did;
@@ -971,9 +970,9 @@ static int catsearch_afp(AFPObj *obj _U_, char *ibuf, size_t ibuflen,
     /* Finder info */
     if (c1.rbitmap & (1 << FILPBIT_FINFO)) {
     	packed_finder buf;
-    	
+
 	    memcpy(buf, spec1, sizeof(buf));
-	    unpack_buffer(&c1.finfo, buf);    	
+	    unpack_buffer(&c1.finfo, buf);
 	    spec1 += sizeof(buf);
 
 	    memcpy(buf, spec2, sizeof(buf));
@@ -1001,14 +1000,14 @@ static int catsearch_afp(AFPObj *obj _U_, char *ibuf, size_t ibuflen,
 
     /* Long name */
     if (c1.rbitmap & (1 << FILPBIT_LNAME)) {
-        /* Get the long filename */	
+        /* Get the long filename */
 		memcpy(tmppath, bspec1 + spec1[1] + 1, (bspec1 + spec1[1])[0]);
 		tmppath[(bspec1 + spec1[1])[0]]= 0;
 		len = convert_string ( vol->v_maccharset, CH_UCS2, tmppath, -1, c1.lname, sizeof(c1.lname));
         if (len == (size_t)(-1))
             return AFPERR_PARAM;
 
-#if 0	
+#if 0
 		/* FIXME: do we need it ? It's always null ! */
 		memcpy(c2.lname, bspec2 + spec2[1] + 1, (bspec2 + spec2[1])[0]);
 		c2.lname[(bspec2 + spec2[1])[0]]= 0;

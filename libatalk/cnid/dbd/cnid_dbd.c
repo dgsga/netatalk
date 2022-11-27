@@ -7,29 +7,25 @@
 #include "config.h"
 
 #ifdef CNID_BACKEND_DBD
-
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/uio.h>
-#include <sys/time.h>
-#include <sys/un.h>
-#include <sys/socket.h>
-#include <sys/param.h>
+#include <arpa/inet.h>
 #include <errno.h>
-#include <netinet/in.h>
 #include <net/if.h>
-#include <netinet/tcp.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <errno.h>
 #include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <stdlib.h>
+#include <sys/param.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/uio.h>
+#include <sys/un.h>
 #include <time.h>
-#include <arpa/inet.h>
 
-#include <atalk/logger.h>
 #include <atalk/adouble.h>
 #include <atalk/cnid.h>
 #include <atalk/cnid_bdb_private.h>
+#include <atalk/logger.h>
 #include <atalk/util.h>
 #include <atalk/volume.h>
 
@@ -1038,4 +1034,3 @@ struct _cnid_module cnid_dbd_module = {
 };
 
 #endif /* CNID_DBD */
-
