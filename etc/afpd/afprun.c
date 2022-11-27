@@ -22,24 +22,21 @@
 
 #include "config.h"
 
+#include <errno.h>
+#include <grp.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-/* #define __USE_GNU 1 */
-#include <unistd.h>
-#include <grp.h>
-
-#include <errno.h>
-#include <sys/wait.h>
-#include <sys/param.h>
 #include <string.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-/* FIXME */
+#include <atalk/logger.h>
+
 #ifndef USE_SETEUID
 #define USE_SETEUID 1
 #endif
-
-#include <atalk/logger.h>
 
 /**************************************************************************n
  Find a suitable temporary directory. The result should be copied immediately

@@ -26,19 +26,20 @@
 
 #include "config.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
+#include <arpa/inet.h>
 #include <ctype.h>
 #include <errno.h>
-#include <sys/param.h>
 #include <iconv.h>
-#include <arpa/inet.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/param.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-#include <atalk/unicode.h>
-#include <atalk/logger.h>
 #include <atalk/byteorder.h>
+#include <atalk/logger.h>
+#include <atalk/unicode.h>
 
 
 /**

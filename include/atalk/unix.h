@@ -17,9 +17,9 @@
 
 #include <config.h>
 
+#include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <dirent.h>
 
 #include <atalk/globals.h>
 
