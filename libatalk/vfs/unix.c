@@ -220,7 +220,7 @@ int copy_ea(const char *ea, int dirfd _U_, const char *src, const char *dst, mod
     EC_INIT;
     int    sfd = -1;
     int    dfd = -1;
-    size_t easize;
+    ssize_t easize;
     char   *eabuf = NULL;
 
 #ifdef HAVE_ATFUNCS
