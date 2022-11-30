@@ -41,7 +41,7 @@ static void usage(void)
 static void parse_ldapconf(void)
 {
     static int inited = 0;
-    dictionary *iniconfig;
+    dictionary *iniconfig _U_;
 
     if (! inited) {
 #ifdef HAVE_LDAP
@@ -151,4 +151,3 @@ int main( int argc, char **argv)
 
     return 0;
 }
-
