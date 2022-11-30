@@ -190,16 +190,11 @@ static size_t sys_iconv(void *cd,
 			char **inbuf, size_t *inbytesleft,
 			char **outbuf, size_t *outbytesleft)
 {
-#ifdef HAVE_USABLE_ICONV
 	size_t ret = iconv((iconv_t)cd,
 			   (ICONV_CONST char**)inbuf, inbytesleft,
 			   outbuf, outbytesleft);
 	if (ret == (size_t)-1) iconv(cd, NULL, NULL, NULL, NULL);
 	return ret;
-#else
-	errno = EINVAL;
-	return -1;
-#endif
 }
 
 /**

@@ -356,7 +356,7 @@ int ad_init_offsets(struct adouble *ad)
 /* ----------------------------------- */
 static int new_ad_header(struct adouble *ad, const char *path, struct stat *stp, int adflags)
 {
-    const struct entry  *eid;
+    const struct entry  *eid _U_;
     uint16_t            ashort;
     struct stat         st;
 
@@ -747,7 +747,7 @@ static int ad_header_read_ea(const char *path, struct adouble *ad, const struct 
 {
     EC_INIT;
     uint16_t nentries;
-    int      len;
+    int      len _U_;
     ssize_t  header_len;
     char     *buf = ad->ad_data;
 
@@ -934,7 +934,7 @@ static int ad_header_upgrade_ea(struct adouble *ad _U_, const char *name _U_)
  */
 static int ad_error(struct adouble *ad, int adflags)
 {
-    int err = errno;
+    int err _U_ = errno;
     if (adflags & ADFLAGS_NOHF) { /* 1 */
         return 0;
     }
@@ -1199,7 +1199,7 @@ EC_CLEANUP:
     EC_EXIT;
 }
 
-static int ad_open_hf_ea(const char *path, int adflags, int mode, struct adouble *ad)
+static int ad_open_hf_ea(const char *path, int adflags, int mode _U_, struct adouble *ad)
 {
     EC_INIT;
     int oflags;
@@ -1318,7 +1318,7 @@ static int ad_open_hf(const char *path, int adflags, int mode, struct adouble *a
 /*!
  * Get resofork length for adouble:ea, parameter 'ad' may be NULL
  */
-off_t ad_reso_size(const char *path, int adflags, struct adouble *ad)
+off_t ad_reso_size(const char *path, int adflags, struct adouble *ad _U_)
 {
     EC_INIT;
     struct stat st;
@@ -1359,7 +1359,7 @@ EC_CLEANUP:
     return rlen;
 }
 
-static int ad_open_rf_v2(const char *path, int adflags, int mode, struct adouble *ad)
+static int ad_open_rf_v2(const char *path, int adflags, int mode _U_, struct adouble *ad)
 {
     EC_INIT;
 

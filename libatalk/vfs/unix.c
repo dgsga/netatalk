@@ -58,7 +58,7 @@ int setfilmode(const struct vol *vol, const char *name, mode_t mode, struct stat
  *
  * Supports *at semantics (cf openat) if HAVE_ATFUNCS. Pass dirfd=-1 to ignore this.
  */
-int netatalk_rmdir_all_errors(int dirfd, const char *name)
+int netatalk_rmdir_all_errors(int dirfd _U_, const char *name)
 {
     int err;
 
@@ -163,7 +163,7 @@ EC_CLEANUP:
 /*
  * Supports *at semantics if HAVE_ATFUNCS, pass dirfd=-1 to ignore this
  */
-int copy_file(int dirfd, const char *src, const char *dst, mode_t mode)
+int copy_file(int dirfd _U_, const char *src, const char *dst, mode_t mode)
 {
     int    ret = 0;
     int    sfd = -1;
@@ -215,7 +215,7 @@ exit:
  *
  * Supports *at semantics if HAVE_ATFUNCS, pass dirfd=-1 to ignore this
  */
-int copy_ea(const char *ea, int dirfd, const char *src, const char *dst, mode_t mode)
+int copy_ea(const char *ea, int dirfd _U_, const char *src, const char *dst, mode_t mode)
 {
     EC_INIT;
     int    sfd = -1;
@@ -250,7 +250,7 @@ EC_CLEANUP:
 /*
  * at wrapper for netatalk_unlink
  */
-int netatalk_unlinkat(int dirfd, const char *name)
+int netatalk_unlinkat(int dirfd _U_, const char *name)
 {
 #ifdef HAVE_ATFUNCS
     if (dirfd == -1)
@@ -289,7 +289,7 @@ int netatalk_unlinkat(int dirfd, const char *name)
  * @param dfd        (r) same as sfd
  * @param newpath    (r) guess what
  */
-int unix_rename(int sfd, const char *oldpath, int dfd, const char *newpath)
+int unix_rename(int sfd _U_, const char *oldpath, int dfd _U_, const char *newpath)
 {
 #ifdef HAVE_ATFUNCS
     if (sfd == -1)
@@ -316,7 +316,7 @@ int unix_rename(int sfd, const char *oldpath, int dfd, const char *newpath)
  * @param path    (r) pathname
  * @param st      (rw) pointer to struct stat
  */
-int statat(int dirfd, const char *path, struct stat *st)
+int statat(int dirfd _U_, const char *path, struct stat *st)
 {
 #ifdef HAVE_ATFUNCS
     if (dirfd == -1)
