@@ -47,9 +47,6 @@ uamdir = '-D_PATH_AFPDUAMPATH="' + libdir + '/netatalk/"'
 dversion = '-DVERSION="' + version + '"'
 
 cdata.set('bindir', bindir)
-cdata.set('CNID_BACKEND_DBD', '1')
-cdata.set('CNID_BACKEND_LAST', '1')
-cdata.set('CNID_BACKEND_MYSQL', '1')
 cdata.set('compiled_backends', '"dbd last mysql"')
 cdata.set('DBUS_DAEMON_PATH', bindir)
 cdata.set('DEFAULT_CNID_SCHEME', '"dbd"')
