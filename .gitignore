@@ -31,3 +31,8 @@ test-driver
 *.o
 **/.DS_Store
 build-aux
+*.iml
+ylwrap
+test-driver
+.idea
+build
