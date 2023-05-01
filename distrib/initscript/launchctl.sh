@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the path for the executable to current folder
-cd "$(dirname $0)"
+cd "$(dirname "$0")" || exit
 
 # Install netatalk launch daemon
 if [[ ! -f /Library/LaunchDaemons/com.netatalk.daemon.plist ]]; then
