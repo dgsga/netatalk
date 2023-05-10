@@ -4,10 +4,10 @@
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
 .\"      Date: 11 Apr 2023
 .\"    Manual: Netatalk AFP Fileserver Manual
-.\"    Source: Netatalk @NETATALK_VERSION@
+.\"    Source: Netatalk
 .\"  Language: English
 .\"
-.TH "AFP\&.CONF" "5" "11 Apr 2023" "Netatalk @NETATALK_VERSION@" "Netatalk AFP Fileserver Manual"
+.TH "AFP\&.CONF" "5" "11 Apr 2023" "Netatalk" "Netatalk AFP Fileserver Manual"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -309,23 +309,6 @@ uam list = \fIuam list\fR \fB(G)\fR
 Space or comma separated list of UAMs\&. (The default is "uams_dhx\&.so uams_dhx2\&.so")\&.
 .sp
 The most commonly used UAMs are:
-.PP
-uams_guest\&.so
-.RS 4
-allows guest logins
-.RE
-.PP
-uams_clrtxt\&.so
-.RS 4
-(uams_pam\&.so or uams_passwd\&.so) Allow logins with passwords transmitted in the clear\&. (legacy)
-.RE
-.PP
-uams_randnum\&.so
-.RS 4
-allows Random Number and Two\-Way Random Number Exchange for authentication (requires a separate file containing the passwords, either @prefix@/etc/afppasswd file or the one specified via "\fBpasswd file\fR")\&. See
-\fBafppasswd\fR(1)
-for details\&. (legacy)
-.RE
 .PP
 uams_dhx\&.so
 .RS 4
