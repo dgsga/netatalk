@@ -395,39 +395,6 @@
 
             <variablelist>
               <varlistentry>
-                <term>uams_guest.so</term>
-
-                <listitem>
-                  <para>allows guest logins</para>
-                </listitem>
-              </varlistentry>
-
-              <varlistentry>
-                <term>uams_clrtxt.so</term>
-
-                <listitem>
-                  <para>(uams_pam.so or uams_passwd.so) Allow logins with
-                  passwords transmitted in the clear. (legacy)</para>
-                </listitem>
-              </varlistentry>
-
-              <varlistentry>
-                <term>uams_randnum.so</term>
-
-                <listitem>
-                  <para>allows Random Number and Two-Way Random Number
-                  Exchange for authentication (requires a separate file
-                  containing the passwords, either @prefix@/etc/afppasswd file or
-                  the one specified via "<option>passwd file</option>"). See
-                  <citerefentry>
-                      <refentrytitle>afppasswd</refentrytitle>
-
-                      <manvolnum>1</manvolnum>
-                    </citerefentry> for details. (legacy)</para>
-                </listitem>
-              </varlistentry>
-
-              <varlistentry>
                 <term>uams_dhx.so</term>
 
                 <listitem>
