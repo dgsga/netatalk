@@ -23,8 +23,6 @@
 #include "config.h"
 #include <stdlib.h>
 
-#if HAVE_USABLE_ICONV
-
 #include "generic_cjk.h"
 #include "mac_chinese_simp.h"
 
@@ -112,4 +110,3 @@ static size_t mac_chinese_simp_pull(void *cd, char **inbuf, size_t *inbytesleft,
   return cjk_generic_pull(mac_chinese_simp_char_pull,
 			  cd, inbuf, inbytesleft, outbuf, outbytesleft);
 }
-#endif

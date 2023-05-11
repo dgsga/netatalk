@@ -21,10 +21,8 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-#ifdef HAVE_LDAP
 #define LDAP_DEPRECATED 1
 #include <ldap.h>
-#endif
 
 #include <atalk/ldapconfig.h>
 #include <atalk/uuid.h>
@@ -44,7 +42,6 @@ static void parse_ldapconf(void)
     dictionary *iniconfig _U_;
 
     if (! inited) {
-#ifdef HAVE_LDAP
         /* Parse afp.conf */
         printf("Start parsing afp.conf\n");
         iniconfig = atalk_iniparser_load(_PATH_CONFDIR "afp.conf");
@@ -63,9 +60,6 @@ static void parse_ldapconf(void)
         } else {
             printf("afp.conf is not ok, not using LDAP. Only local UUID testing available.\n");
         }
-#else
-        printf("Built without LDAP support, only local UUID testing available.\n");
-#endif
         inited = 1;
     }
 }

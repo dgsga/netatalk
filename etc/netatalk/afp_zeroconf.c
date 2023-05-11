@@ -11,27 +11,19 @@
 
 #include "afp_zeroconf.h"
 
-#ifdef HAVE_MDNS
 #include "afp_mdns.h"
-#endif
-
 
 /*
  * Functions (actually they are just facades)
  */
 void zeroconf_register(const AFPObj *configs _U_)
 {
-#if defined (HAVE_MDNS)
   LOG(log_debug, logtype_afpd, "Attempting to register with mDNS using mDNSResponder");
-
 	md_zeroconf_register(configs);
-#endif
 }
 
 void zeroconf_deregister(void)
 {
-#if defined (HAVE_MDNS)
   LOG(log_debug, logtype_afpd, "Attempting to de-register mDNS using mDNSResponder");
 	md_zeroconf_unregister();
-#endif
 }

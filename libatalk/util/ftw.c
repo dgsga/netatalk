@@ -37,15 +37,11 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#if HAVE_SYS_PARAM_H
 # include <sys/param.h>
-#endif
 
 #include <atalk/ftw.h>
 
-#ifndef HAVE_MEMPCPY
 #define mempcpy(D, S, N) ((void *) ((char *) memcpy (D, S, N) + (N)))
-#endif
 
 #define NDEBUG 1
 #include <assert.h>
@@ -823,4 +819,3 @@ int NFTW_NAME(const char *path,
 {
     return ftw_startup (path, 1, func, up, descriptors, flags);
 }
-
