@@ -8,28 +8,14 @@
 
 #include "config.h"
 
-#include <arpa/inet.h>
-#include <ctype.h>
-#include <netinet/in.h>
-#include <grp.h>
-#include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/param.h>
-#include <sys/socket.h>
-#include <sys/types.h>
 #include <unistd.h>
 
-#include <atalk/errchk.h>
 #include <atalk/fce_api.h>
-#include <atalk/globals.h>
-#include <atalk/logger.h>
-#include <atalk/paths.h>
-#include <atalk/util.h>
 
 #include "auth.h"
-#include "dircache.h"
 #include "status.h"
 
 #define LENGTH 512

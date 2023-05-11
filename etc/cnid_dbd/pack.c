@@ -7,7 +7,6 @@
 #include "config.h"
 
 #include <arpa/inet.h>
-#include <inttypes.h>
 #include <string.h>
 #include <sys/param.h>
 #include <db.h>

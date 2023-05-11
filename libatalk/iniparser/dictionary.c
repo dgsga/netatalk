@@ -44,8 +44,6 @@ DEALINGS IN THE SOFTWARE.
 
 #include <atalk/dictionary.h>
 
-#include <atalk/dictionary.h>
-
 /** Maximum value size for integers and doubles. */
 #define MAXVALSZ 1024
 

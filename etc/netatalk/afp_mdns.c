@@ -14,7 +14,6 @@
 
 #include <atalk/logger.h>
 #include <atalk/netatalk_conf.h>
-#include <atalk/unicode.h>
 #include <atalk/util.h>
 
 #include "afp_mdns.h"
