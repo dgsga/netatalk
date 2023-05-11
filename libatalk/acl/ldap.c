@@ -14,8 +14,6 @@
 
 #include "config.h"
 
-#ifdef HAVE_LDAP
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -449,4 +447,3 @@ int ldap_getnamefromuuid( const char *uuidstr, char **name, uuidtype_t *type) {
 EC_CLEANUP:
     EC_EXIT;
 }
-#endif  /* HAVE_LDAP */

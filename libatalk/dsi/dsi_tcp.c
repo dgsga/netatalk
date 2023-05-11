@@ -13,9 +13,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#ifdef HAVE_NETDB_H
 #include <netdb.h>
-#endif /* HAVE_NETDB_H */
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/socket.h>
@@ -104,10 +102,8 @@ void dsi_free(DSI *dsi)
     free(dsi->buffer);
     dsi->buffer = NULL;
 
-#ifdef USE_ZEROCONF
     free(dsi->bonjourname);
     dsi->bonjourname = NULL;
-#endif
 }
 
 static struct itimerval itimer;

@@ -37,20 +37,7 @@ ssize_t adf_pread(struct ad_fd *ad_fd, void *buf, size_t count, off_t offset)
 {
     ssize_t     cc;
 
-#ifndef  HAVE_PREAD
-    if ( ad_fd->adf_off != offset ) {
-        if ( lseek( ad_fd->adf_fd, offset, SEEK_SET ) < 0 ) {
-            return -1;
-        }
-        ad_fd->adf_off = offset;
-    }
-    if (( cc = read( ad_fd->adf_fd, buf, count )) < 0 ) {
-        return -1;
-    }
-    ad_fd->adf_off += cc;
-#else
     cc = pread(ad_fd->adf_fd, buf, count, offset );
-#endif
     return cc;
 }
 
@@ -81,11 +68,7 @@ ssize_t ad_read( struct adouble *ad, const uint32_t eid, off_t off, char *buf, c
             return 0;
 
         if (ad->ad_vers == AD_VERSION_EA) {
-#ifdef HAVE_EAFD
-            r_off = off;
-#else
             r_off = off + ADEDOFF_RFORK_OSX;
-#endif
         } else {
             r_off = ad_getentryoff(ad, eid) + off;
         }

@@ -19,23 +19,11 @@
 #include <atalk/logger.h>
 
 #if 0
-#ifdef BSD4_4
-#include <sys/param.h>
-#ifndef HAVE_GETHOSTID
-#include <sys/sysctl.h>
-#endif /* HAVE_GETHOSTID */
-#endif /* BSD4_4 */
 #endif
 
 #include <arpa/inet.h>
 
-#ifdef HAVE_KERBEROS
-#ifdef HAVE_KRB5_KRB5_H
 #include <krb5/krb5.h>
-#else
-#include <krb5.h>
-#endif /* HAVE_KRB5_KRB5_H */
-#endif /* HAVE_KERBEROS */
 
 #include <atalk/dsi.h>
 #include <atalk/unicode.h>

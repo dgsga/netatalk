@@ -28,10 +28,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
-#ifdef HAVE_BACKTRACE_SYMBOLS
 #include <execinfo.h>
-#endif
 #include <atalk/logger.h>
+#include <atalk/util.h>
 
 #ifndef SIGNAL_CAST
 #define SIGNAL_CAST (void (*)(int))
@@ -52,7 +51,6 @@ static void (*cont_fn)(void *);
 
 static void (*CatchSignal(int signum,void (*handler)(int )))(int)
 {
-#ifdef HAVE_SIGACTION
 	struct sigaction act;
 	struct sigaction oldact;
 
@@ -70,10 +68,6 @@ static void (*CatchSignal(int signum,void (*handler)(int )))(int)
 	sigaddset(&act.sa_mask,signum);
 	sigaction(signum,&act,&oldact);
 	return oldact.sa_handler;
-#else /* !HAVE_SIGACTION */
-	/* FIXME: need to handle sigvec and systems with broken signal() */
-	return signal(signum, handler);
-#endif
 }
 
 /*******************************************************************
@@ -82,7 +76,6 @@ static void (*CatchSignal(int signum,void (*handler)(int )))(int)
 
 void netatalk_panic(const char *why _U_)
 {
-#ifdef HAVE_BACKTRACE_SYMBOLS
 	void *backtrace_stack[BACKTRACE_STACK_SIZE];
 	size_t backtrace_size;
 	char **backtrace_strings;
@@ -102,7 +95,6 @@ void netatalk_panic(const char *why _U_)
 
 		SAFE_FREE(backtrace_strings);
 	}
-#endif
 }
 
 

@@ -6,36 +6,9 @@
 #include "config.h"
 #include "volume.h"
 
-#if defined(HAVE_SYS_VFS_H)
-#include <sys/vfs.h>
-#endif /* HAVE_SYS_VFS_H */
-
-#if defined(HAVE_STATFS_H) 
-#include <sys/statfs.h>
-/* this might not be right. */
-#define f_mntfromname f_fname
-#endif /* HAVE_STATFS_H */
-
-#if defined(__svr4__) || defined(__NetBSD__)
-#include <sys/statvfs.h>
-#define statfs statvfs
-#else
 #define	f_frsize f_bsize
-#endif /* __svr4__ || __NetBSD__ */
-
-#if defined(__svr4__) || defined(HAVE_SYS_MNTTAB_H)
-#include <sys/mnttab.h>
-#endif /* __svr4__ || HAVE_SYS_MNTTAB_H */
-
-#if defined(__DragonFly__)
-#define dqblk ufs_dqblk
-#endif
 
 #include <sys/mount.h>
-
-#if defined(linux) || defined(HAVE_MNTENT_H)
-#include <mntent.h>
-#endif /* linux || HAVE_MNTENT_H */
 
 extern struct afp_options default_options;
 
