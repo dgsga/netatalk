@@ -248,21 +248,10 @@ static int moveandrename(const AFPObj *obj,
         id = cnid_get(vol->v_cdb, sdir->d_did, oldunixname, strlen(oldunixname));
         AFP_CNID_DONE();
 
-#ifndef HAVE_ATFUNCS
-        /* Need full path */
-        free(oldunixname);
-        if ((oldunixname = strdup(ctoupath(vol, sdir, oldname))) == NULL)
-            return AFPERR_PARAM; /* pathname too long */
-#endif /* HAVE_ATFUNCS */
-
         path.st_valid = 0;
         path.u_name = oldunixname;
 
-#ifdef HAVE_ATFUNCS
         opened = of_findnameat(sdir_fd, &path);
-#else
-        opened = of_findname(vol, &path);
-#endif /* HAVE_ATFUNCS */
 
         if (opened) {
             /* reuse struct adouble so it won't break locks */
@@ -762,10 +751,8 @@ int afp_moveandrename(AFPObj *obj, char *ibuf, size_t ibuflen _U_, char *rbuf _U
         memcpy(oldname, cfrombstr(sdir->d_m_name), blength(sdir->d_m_name) + 1);
     }
 
-#ifdef HAVE_ATFUNCS
     if ((sdir_fd = open(".", O_RDONLY)) == -1)
         return AFPERR_MISC;
-#endif
 
     /* get the destination directory */
     if (NULL == ( ddir = dirlookup( vol, did )) ) {
@@ -815,10 +802,8 @@ int afp_moveandrename(AFPObj *obj, char *ibuf, size_t ibuflen _U_, char *rbuf _U
     }
 
 exit:
-#ifdef HAVE_ATFUNCS
     if (sdir_fd != -1)
         close(sdir_fd);
-#endif
 
     return( rc );
 }
@@ -856,4 +841,3 @@ int veto_file(const char*veto_str, const char*path)
     }
     return 0;
 }
-

@@ -7,9 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif
 #include <string.h>
 #include <sys/stat.h> /* works around a bug */
 #include <sys/param.h>
@@ -244,8 +242,6 @@ int of_stat(const struct vol *vol, struct path *path)
     return ret;
 }
 
-
-#ifdef HAVE_ATFUNCS
 int of_fstatat(int dirfd, struct path *path)
 {
     int ret;
@@ -258,7 +254,6 @@ int of_fstatat(int dirfd, struct path *path)
 
    return ret;
 }
-#endif /* HAVE_ATFUNCS */
 
 /* --------------------------
    stat the current directory.
@@ -338,7 +333,6 @@ struct ofork *of_findname(const struct vol *vol, struct path *path)
  * @param dirfd     (r) directory fd
  * @param path      (rw) pointer to struct path
  */
-#ifdef HAVE_ATFUNCS
 struct ofork *of_findnameat(int dirfd, struct path *path)
 {
     struct ofork *of;
@@ -362,7 +356,6 @@ struct ofork *of_findnameat(int dirfd, struct path *path)
 
     return NULL;
 }
-#endif
 
 void of_dealloc(struct ofork *of)
 {
@@ -423,17 +416,6 @@ int of_closefork(const AFPObj *obj, struct ofork *ofork)
 
     ad_unlock(ofork->of_ad, ofork->of_refnum, ofork->of_flags & AFPFORK_ERROR ? 0 : 1);
 
-#ifdef HAVE_FSHARE_T
-    if (obj->options.flags & OPTION_SHARE_RESERV) {
-        fshare_t shmd;
-        shmd.f_id = ofork->of_refnum;
-        if (AD_DATA_OPEN(ofork->of_ad))
-            fcntl(ad_data_fileno(ofork->of_ad), F_UNSHARE, &shmd);
-        if (AD_RSRC_OPEN(ofork->of_ad))
-            fcntl(ad_reso_fileno(ofork->of_ad), F_UNSHARE, &shmd);
-    }
-#endif
-
     ret = 0;
 
     /*
@@ -456,14 +438,12 @@ int of_closefork(const AFPObj *obj, struct ofork *ofork)
         && (ofork->of_ad->ad_rfp->adf_refcount == 1)
         && (ad_openforks(ofork->of_ad, ATTRBIT_DOPEN) == 0)) {
 
-#ifndef HAVE_EAFD
         (void)unlink(ofork->of_ad->ad_ops->ad_path(
                          mtoupath(ofork->of_vol,
                                   of_name(ofork),
                                   ofork->of_did,
                                   utf8_encoding(obj)),
                          0));
-#endif
     }
 
     if ( ad_close( ofork->of_ad, adflags | ADFLAGS_SETSHRMD) < 0 ) {
@@ -534,4 +514,3 @@ void of_close_all_forks(const AFPObj *obj)
     }
     return;
 }
-

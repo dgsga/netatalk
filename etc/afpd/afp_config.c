@@ -15,9 +15,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#ifdef HAVE_GETIFADDRS
 #include <ifaddrs.h>
-#endif
 
 #include <atalk/logger.h>
 #include <atalk/util.h>
@@ -29,9 +27,7 @@
 #include <atalk/netatalk_conf.h>
 #include <atalk/fce_api.h>
 
-#ifdef HAVE_LDAP
 #include <atalk/ldapconfig.h>
-#endif
 
 #include "afp_config.h"
 #include "uam_auth.h"
@@ -88,9 +84,7 @@ int configinit(AFPObj *obj)
 
     auth_load(obj, obj->options.uampath, obj->options.uamlist);
     set_signature(&obj->options);
-#ifdef HAVE_LDAP
     acl_ldap_freeconfig();
-#endif /* HAVE_LDAP */
 
     LOG(log_debug, logtype_afpd, "DSIConfigInit: hostname: %s, listen: %s, interfaces: %s, port: %s",
         obj->options.hostname,
@@ -131,50 +125,7 @@ int configinit(AFPObj *obj)
     * to be unable to return ipv4 addresses
     */
     if (obj->options.interfaces) {
-#ifndef HAVE_GETIFADDRS
         LOG(log_error, logtype_afpd, "option \"afp interfaces\" not supported");
-#else
-        if (getifaddrs(&ifaddr) == -1) {
-            LOG(log_error, logtype_afpd, "getinterfaddr: getifaddrs() failed: %s", strerror(errno));
-            EC_FAIL;
-        }
-
-        EC_NULL( q = p = strdup(obj->options.interfaces) );
-        EC_NULL( p = strtok_r(p, ", ", &savep) );
-        while (p) {
-            for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
-                if (ifa->ifa_addr == NULL)
-                    continue;
-                if (STRCMP(ifa->ifa_name, !=, p))
-                    continue;
-
-                family = ifa->ifa_addr->sa_family;
-                if (family == AF_INET || family == AF_INET6) {
-                    if (getnameinfo(ifa->ifa_addr,
-                                    (family == AF_INET) ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6),
-                                    interfaddr, NI_MAXHOST, NULL, 0, NI_NUMERICHOST) != 0) {
-                        LOG(log_error, logtype_afpd, "getinterfaddr: getnameinfo() failed %s", gai_strerror(errno));
-                        continue;
-                    }
-
-                    if ((dsi = dsi_init(obj, obj->options.hostname, interfaddr, obj->options.port)) == NULL)
-                        continue;
-
-                    status_init(obj, dsi);
-                    *next = dsi;
-                    next = &dsi->next;
-                    dsi->AFPobj = obj;
-
-                    LOG(log_note, logtype_afpd, "Netatalk AFP/TCP listening on interface %s with address %s:%d",
-                        p,
-                        getip_string((struct sockaddr *)&dsi->server),
-                        getip_port((struct sockaddr *)&dsi->server));
-                } /* if (family == AF_INET || family == AF_INET6) */
-            } /* for (ifa != NULL) */
-            p = strtok_r(NULL, ", ", &savep);
-        }
-        freeifaddrs(ifaddr);
-#endif
     }
 
     /*
@@ -195,10 +146,8 @@ int configinit(AFPObj *obj)
             getip_port((struct sockaddr *)&dsi->server));
     }
 
-#ifdef HAVE_LDAP
     /* Parse afp.conf */
     acl_ldap_readconfig(obj->iniconfig);
-#endif /* HAVE_LDAP */
 
     if ((r = atalk_iniparser_getstring(obj->iniconfig, INISEC_GLOBAL, "fce listener", NULL))) {
 		LOG(log_note, logtype_afpd, "Adding FCE listener: %s", r);
