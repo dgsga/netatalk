@@ -9,10 +9,7 @@
 #include "config.h"
 
 #ifdef CNID_BACKEND_LAST
-#include <arpa/inet.h>
 #include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
 
 #include <atalk/logger.h>
 #include <atalk/util.h>

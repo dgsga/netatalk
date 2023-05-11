@@ -11,7 +11,6 @@
 #include <string.h>
 
 #include <atalk/adouble.h>
-#include <atalk/logger.h>
 
 
 

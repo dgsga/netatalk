@@ -14,22 +14,17 @@
 
 #include <atalk/adouble.h>
 #include <atalk/afp.h>
-#include <atalk/bstradd.h>
-#include <atalk/bstrlib.h>
 #include <atalk/cnid.h>
 #include <atalk/globals.h>
 #include <atalk/logger.h>
 #include <atalk/netatalk_conf.h>
 #include <atalk/util.h>
-#include <atalk/vfs.h>
 
-#include "desktop.h"
 #include "dircache.h"
 #include "directory.h"
 #include "file.h"
 #include "filedir.h"
 #include "fork.h"
-#include "volume.h"
 
 #define min(a,b)	((a)<(b)?(a):(b))
 
