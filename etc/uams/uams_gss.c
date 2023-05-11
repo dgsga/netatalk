@@ -8,17 +8,13 @@
 
 #include "config.h"
 
-#include <arpa/inet.h>
 #include <stdbool.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include <atalk/afp.h>
 #include <atalk/globals.h>
 #include <atalk/logger.h>
-#include <atalk/uam.h>
-#include <atalk/util.h>
 
 /* Kerberos includes */
 #include <gssapi/gssapi.h>

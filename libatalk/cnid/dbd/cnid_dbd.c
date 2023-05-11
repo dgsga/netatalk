@@ -7,9 +7,7 @@
 #include "config.h"
 
 #ifdef CNID_BACKEND_DBD
-#include <arpa/inet.h>
 #include <errno.h>
-#include <net/if.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
