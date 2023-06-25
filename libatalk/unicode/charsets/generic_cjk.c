@@ -26,7 +26,7 @@ static size_t cjk_iconv(void *cd, char **inbuf, char *end,
 			char **outbuf, size_t *outbytesleft)
 {
   size_t n = end - *inbuf;
-  if (iconv(cd, (ICONV_CONST char**)inbuf, &n, outbuf, outbytesleft) == (size_t)-1) {
+  if (iconv(cd, (char**)inbuf, &n, outbuf, outbytesleft) == (size_t)-1) {
     iconv(cd, NULL, NULL, NULL, NULL);
   }
   return n;

@@ -13,9 +13,6 @@
 /* Available Extended Attributes modules */
 #mesondefine EA_MODULES
 
-/* Define as const if the declaration of iconv() needs const. */
-#mesondefine ICONV_CONST
-
 /* errno returned by open with O_NOFOLLOW */
 #mesondefine OPEN_NOFOLLOW_ERRNO
 
