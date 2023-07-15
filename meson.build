@@ -23,7 +23,6 @@ inc = include_directories(
     '.',
     'etc/afpd',
     prefix / 'opt/db/include',
-    prefix / 'opt/libressl/include',
     'include',
 )
 

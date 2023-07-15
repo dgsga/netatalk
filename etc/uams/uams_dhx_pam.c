@@ -13,12 +13,14 @@
 #include <security/pam_appl.h>
 #include <unistd.h>
 
-#include <openssl/bn.h>
-#include <openssl/cast.h>
-#include <openssl/dh.h>
-#include <openssl/err.h>
+#include <wolfssl/options.h>
+#include <wolfssl/openssl/bn.h>
+#include <wolfssl/openssl/dh.h>
+#include <wolfssl/openssl/err.h>
+#include <wolfssl/openssl/ssl.h>
 
 #include <atalk/afp.h>
+#include <atalk/cast.h>
 #include <atalk/logger.h>
 #include <atalk/uam.h>
 
