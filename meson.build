@@ -65,7 +65,6 @@ configure_file(input : 'config.h.meson',
                configuration : cdata)
 
 db = cc.find_library('db', dirs : prefix/'opt/berkeley-db/lib', required: true)
-crypto = cc.find_library('crypto', dirs : prefix/'opt/libressl/lib', required: true)
 kerberos = cc.find_library('krb5', required : true)
 ldap = cc.find_library('ldap', required : true)
 pam = cc.find_library('pam', required : true)
@@ -79,6 +78,7 @@ libgcrypt = dependency('libgcrypt', required : true)
 libiconv = dependency('iconv', method : 'system', required : true)
 mysqlclient = dependency('mysqlclient', required : true)
 threads = dependency('threads', required : true)
+wolfssl = dependency('wolfssl', required : true)
 
 brew = find_program('brew', required : true)
 xsltproc = find_program('xsltproc', required : true)
