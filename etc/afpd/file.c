@@ -982,7 +982,7 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
     /* second try with adouble open
     */
     if (ad_open(adp, upath, ADFLAGS_HF | ADFLAGS_RDWR | ADFLAGS_CREATE, 0666) < 0) {
-        LOG(log_debug, logtype_afpd, "setfilparams: ad_open_metadata error: %s", strerror(errno));
+        LOG(log_debug, logtype_afpd, "setfilparams: ad_open_metadata error");
         /*
          * For some things, we don't need an adouble header:
          * - change of modification date
@@ -1014,9 +1014,6 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
 
         switch(  bit ) {
         case FILPBIT_ATTR :
-            if (isad == 0) {
-                break;
-            }
             ad_getattr(adp, &bshort);
             oshort = bshort;
             if ( ntohs( ashort ) & ATTRBIT_SETCLR ) {
@@ -1030,23 +1027,14 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
             ad_setattr(adp, bshort);
             break;
         case FILPBIT_CDATE :
-            if (isad == 0) {
-                break;
-            }
             ad_setdate(adp, AD_DATE_CREATE, cdate);
             break;
         case FILPBIT_MDATE :
             break;
         case FILPBIT_BDATE :
-            if (isad == 0) {
-                break;
-            }
             ad_setdate(adp, AD_DATE_BACKUP, bdate);
             break;
         case FILPBIT_FINFO :
-            if (isad == 0) {
-                break;
-            }
             ade = ad_entry(adp, ADEID_FINDERI);
             AFP_ASSERT(ade != NULL);
             if (default_type(ade)
@@ -1068,9 +1056,6 @@ int setfilparams(const AFPObj *obj, struct vol *vol,
             }
             break;
         case FILPBIT_PDINFO :
-            if (isad == 0) {
-                break;
-            }
             ade = ad_entry(adp, ADEID_FINDERI);
             AFP_ASSERT(ade != NULL);
 
