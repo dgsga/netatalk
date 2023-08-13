@@ -801,7 +801,7 @@ static int ad_header_read_ea(const char *path, struct adouble *ad, const struct 
         || !ad_entry(ad, ADEID_PRIVINO)
         || !ad_entry(ad, ADEID_PRIVSYN)
         || !ad_entry(ad, ADEID_PRIVID)) {
-
+        LOG(log_error, logtype_ad, "ad_header_read_ea(\"%s\"): invalid metadata EA", fullpathname(path));
         errno = EINVAL;
         EC_FAIL;
     }
