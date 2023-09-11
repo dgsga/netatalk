@@ -14,6 +14,10 @@
  * server_child.c to ease changes in implementation */
 
 #define CHILD_HASHSIZE 32
+#define CHILD_NFORKS   2
+#define CHILD_ASPFORK  0
+#define CHILD_PAPFORK  0
+#define CHILD_DSIFORK  1
 
 /* One AFP session child process */
 typedef struct afp_child {

@@ -284,6 +284,8 @@ AC_CONFIG_FILES([
   libatalk/Makefile
   libatalk/acl/Makefile
   libatalk/adouble/Makefile
+  libatalk/asp/Makefile
+  libatalk/atp/Makefile
   libatalk/bstring/Makefile
   libatalk/cnid/Makefile
   libatalk/cnid/last/Makefile
@@ -292,6 +294,8 @@ AC_CONFIG_FILES([
   libatalk/compat/Makefile
   libatalk/dsi/Makefile
   libatalk/iniparser/Makefile
+  libatalk/nbp/Makefile
+  libatalk/netddp/Makefile
   libatalk/talloc/Makefile
   libatalk/unicode/Makefile
   libatalk/unicode/charsets/Makefile
