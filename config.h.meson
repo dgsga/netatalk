@@ -13,9 +13,6 @@
 /* Available Extended Attributes modules */
 #mesondefine EA_MODULES
 
-/* errno returned by open with O_NOFOLLOW */
-#mesondefine OPEN_NOFOLLOW_ERRNO
-
 /* netatalk lockfile path */
 #mesondefine PATH_NETATALK_LOCK
 
