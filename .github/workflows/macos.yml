@@ -11,7 +11,7 @@ jobs:
     runs-on: [macos-latest]
     steps:
     - uses: actions/checkout@v3
-    - run: brew install dgsga/netatalk-dbus/dbus-glib docbook-xsl libressl meson mysql
+    - run: brew install dgsga/netatalk-dbus/dbus-glib docbook-xsl meson mysql wolfssl
     - run: meson setup -DRUN_TESTS=true build 
     - run: ninja -C build
     - run: ninja -C build test
