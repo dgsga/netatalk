@@ -648,7 +648,7 @@ static int ad_header_read_osx(const char *path, struct adouble *ad, const struct
 reread:
     if (hst == NULL) {
         hst = &st;
-        EC_NEG1( fstat(ad_reso_fileno(ad), hst) );
+        EC_NEG1( fstat(ad_reso_fileno(ad), &st) );
     }
 
     LOG(log_debug, logtype_ad, "ad_header_read_osx: %s", path ? fullpathname(path) : "");
