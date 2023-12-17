@@ -28,7 +28,7 @@
 #define FCE_LOGOUT          9
 /* keep in sync with public FCE events */
 #define FCE_FIRST_EVENT     FCE_FILE_MODIFY
-#define FCE_LAST_EVENT      FCE_LOGOUT
+#define FCE_LAST_EVENT      FCE_CONN_BROKEN
 
 
 /*
