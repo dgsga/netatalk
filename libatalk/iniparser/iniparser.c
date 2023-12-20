@@ -378,8 +378,7 @@ long int atalk_iniparser_getlongint(const dictionary *d, const char *section, co
     const char *str;
 
     str = atalk_iniparser_getstring(d, section, key, INI_INVALID_KEY);
-    if (str == INI_INVALID_KEY)
-        return notfound;
+    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
     return strtol(str, NULL, 0);
 }
 
@@ -438,8 +437,7 @@ double atalk_iniparser_getdouble(const dictionary *d, const char *section, const
     const char *str;
 
     str = atalk_iniparser_getstring(d, section, key, INI_INVALID_KEY);
-    if (str == INI_INVALID_KEY)
-        return notfound;
+    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
     return atof(str);
 }
 
@@ -482,8 +480,7 @@ int atalk_iniparser_getboolean(const dictionary *d, const char *section, const c
     int ret;
 
     c = atalk_iniparser_getstring(d, section, key, INI_INVALID_KEY);
-    if (c == INI_INVALID_KEY)
-        return notfound;
+    if (c==NULL || c==INI_INVALID_KEY) return notfound ;
     if (c[0] == 'y' || c[0] == 'Y' || c[0] == '1' || c[0] == 't' || c[0] == 'T') {
         ret = 1;
     } else if (c[0] == 'n' || c[0] == 'N' || c[0] == '0' || c[0] == 'f' || c[0] == 'F') {
