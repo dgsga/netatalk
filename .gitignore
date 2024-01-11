@@ -4,7 +4,10 @@ stamp-h
 stamp-h1
 stamp-h.in
 confdefs.h
-config.*
+config.h
+config.h.in
+config.log
+config.status
 configure
 configure.lineno
 configure.scan
