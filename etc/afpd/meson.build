@@ -1,0 +1,78 @@
+afpstatsservice = custom_target(
+    'afpstats_service_glue',
+    output: 'afpstats_service_glue.h',
+    input: 'afpstats-service.xml',
+    command: [
+        'dbus-binding-tool',
+        '--prefix=afpstats_obj',
+        '--mode=glib-server',
+        '--output=@OUTPUT@', '@INPUT@',
+    ],
+)
+
+afpd_files = files(
+    'afp_config.c',
+    'afp_dsi.c',
+    'afp_options.c',
+    'afp_util.c',
+    'afprun.c',
+    'appl.c',
+    'auth.c',
+    'catsearch.c',
+    'desktop.c',
+    'dircache.c',
+    'directory.c',
+    'enumerate.c',
+    'extattrs.c',
+    'fce_api.c',
+    'fce_util.c',
+    'file.c',
+    'filedir.c',
+    'fork.c',
+    'hash.c',
+    'mangle.c',
+    'messages.c',
+    'ofork.c',
+    'status.c',
+    'switch.c',
+    'uam.c',
+    'unix.c',
+    'volume.c',
+)
+
+afpd_sources = [
+    afpd_files,
+    afpstatsservice,
+    'afpstats_obj.c',
+    'afpstats_obj.h',
+    'afpstats.c',
+    'main.c',
+]
+
+executable(
+    'afpd',
+    afpd_sources,
+    include_directories: inc,
+    link_with: libatalk,
+    dependencies: [
+        dbus,
+        dbusglib,
+        gssapi,
+        gthread,
+        kerberos,
+        libgcrypt,
+        mysqlclient,
+        threads,
+    ],
+    c_args: [
+        '-DAPPLCNAME',
+        '-DDBUS_COMPILATION',
+        dversion,
+        messagedir,
+        uamdir,
+        confdir,
+        statedir,
+    ],
+    install: true,
+    install_dir: sbindir,
+)
