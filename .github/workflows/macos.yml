@@ -12,5 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: brew install dgsga/netatalk-dbus/dbus-glib docbook-xsl libressl meson mysql
-    - run: meson setup build
+    - run: meson setup -DRUN_TESTS=true build 
     - run: ninja -C build
+    - run: ninja -C build test
