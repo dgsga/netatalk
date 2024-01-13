@@ -27,43 +27,26 @@
 
 #include "config.h"
 
-#ifdef WITH_SENDFILE
+#include <errno.h>
 #include <stdio.h>
 #include <sys/socket.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include <sys/uio.h>
-#include <errno.h>
+#include <sys/uio.h>
 
 #include <atalk/adouble.h>
 #include <atalk/logger.h>
 
 #include "ad_lock.h"
 
-#if defined(SENDFILE_FLAVOR_LINUX)
-#include <sys/sendfile.h>
 
-ssize_t sys_sendfile(int tofd, int fromfd, off_t *offset, size_t count)
-{
-    return sendfile(tofd, fromfd, offset, count);
-}
-
-#elif defined(SENDFILE_FLAVOR_SOLARIS)
-#include <sys/sendfile.h>
-
-ssize_t sys_sendfile(int tofd, int fromfd, off_t *offset, size_t count)
-{
-    return sendfile(tofd, fromfd, offset, count);
-}
-
-#elif defined(SENDFILE_FLAVOR_BSD )
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/uio.h>
 ssize_t sys_sendfile(int tofd, int fromfd, off_t *offset, size_t count)
 {
     off_t len;
     int ret;
 
-    ret = sendfile(fromfd, tofd, *offset, count, NULL, &len, 0);
+    ret = sendfile(fromfd, tofd, offset, &len, NULL, 0);
 
     *offset += len;
 
@@ -71,16 +54,6 @@ ssize_t sys_sendfile(int tofd, int fromfd, off_t *offset, size_t count)
         return -1;
     return len;
 }
-
-#else
-
-ssize_t sys_sendfile(int out_fd, int in_fd, off_t *_offset, size_t count)
-{
-    /* No sendfile syscall. */
-    errno = ENOSYS;
-    return -1;
-}
-#endif
 
 /* ------------------------------- */
 int ad_readfile_init(const struct adouble *ad,
@@ -101,4 +74,4 @@ int ad_readfile_init(const struct adouble *ad,
 
   return fd;
 }
-#endif
+

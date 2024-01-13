@@ -15,9 +15,6 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_SENDFILEV
-#include <sys/sendfile.h>
-#endif
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <unistd.h>
@@ -326,21 +323,15 @@ exit:
 
 /* ---------------------------------
 */
-#ifdef WITH_SENDFILE
 ssize_t dsi_stream_read_file(DSI *dsi, const int fromfd, off_t offset, const size_t length, const int err)
 {
     int ret = 0;
     size_t written = 0;
     size_t total = length;
-    ssize_t len;
+    size_t len;
     off_t pos = offset;
     char block[DSI_BLOCKSIZ];
-#ifdef HAVE_SENDFILEV
-    int sfvcnt;
-    struct sendfilevec vec[2];
-    ssize_t nwritten;
-#elif defined(FREEBSD)
-    ssize_t nwritten;
+    off_t nwritten;
     void *hdrp;
     struct sf_hdtr hdr;
     struct iovec iovec;
@@ -349,7 +340,6 @@ ssize_t dsi_stream_read_file(DSI *dsi, const int fromfd, off_t offset, const siz
     hdr.trailers = NULL;
     hdr.trl_cnt = 0;
     hdrp = &hdr;
-#endif
 
     LOG(log_maxdebug, logtype_dsi, "dsi_stream_read_file(off: %jd, len: %zu)", (intmax_t)offset, length);
 
@@ -364,52 +354,19 @@ ssize_t dsi_stream_read_file(DSI *dsi, const int fromfd, off_t offset, const siz
     dsi->header.dsi_data.dsi_code = htonl(err);
     dsi_header_pack_reply(dsi, block);
 
-#ifdef HAVE_SENDFILEV
-    total += DSI_BLOCKSIZ;
-    sfvcnt = 2;
-    vec[0].sfv_fd = SFV_FD_SELF;
-    vec[0].sfv_flag = 0;
-    /* Cast to unsigned long to prevent sign extension of the
-     * pointer value for the LFS case; see Apache PR 39463. */
-    vec[0].sfv_off = (unsigned long)block;
-    vec[0].sfv_len = DSI_BLOCKSIZ;
-    vec[1].sfv_fd = fromfd;
-    vec[1].sfv_flag = 0;
-    vec[1].sfv_off = offset;
-    vec[1].sfv_len = length;
-#elif defined(FREEBSD)
     iovec.iov_base = block;
     iovec.iov_len = DSI_BLOCKSIZ;
-#else
-    dsi_stream_write(dsi, block, sizeof(block), DSI_MSG_MORE);
-#endif
 
     while (written < total) {
-#ifdef HAVE_SENDFILEV
-        nwritten = 0;
-        len = sendfilev(dsi->socket, vec, sfvcnt, &nwritten);
-#elif defined(FREEBSD)
-        len = sendfile(fromfd, dsi->socket, pos, total - written, hdrp, &nwritten, 0);
+        len = sendfile(fromfd, dsi->socket, pos, &nwritten, hdrp, 0);
         if (len == 0)
             len = nwritten;
-#else
-        len = sys_sendfile(dsi->socket, fromfd, &pos, total - written);
-#endif
         if (len < 0) {
             switch (errno) {
             case EINTR:
             case EAGAIN:
                 len = 0;
-#if defined(HAVE_SENDFILEV) || defined(FREEBSD)
                 len = (size_t)nwritten;
-#elif defined(SOLARIS)
-                if (pos > offset) {
-                    /* we actually have sent sth., adjust counters and keep trying */
-                    len = pos - offset;
-                    offset = pos;
-                }
-#endif /* HAVE_SENDFILEV */
-
                 if (dsi_peek(dsi) != 0) {
                     ret = -1;
                     goto exit;
@@ -425,18 +382,6 @@ ssize_t dsi_stream_read_file(DSI *dsi, const int fromfd, off_t offset, const siz
             ret = -1;
             goto exit;
         }
-#ifdef HAVE_SENDFILEV
-        if (sfvcnt == 2 && len >= vec[0].sfv_len) {
-            vec[1].sfv_off += len - vec[0].sfv_len;
-            vec[1].sfv_len -= len - vec[0].sfv_len;
-
-            vec[0] = vec[1];
-            sfvcnt = 1;
-        } else {
-            vec[0].sfv_off += len;
-            vec[0].sfv_len -= len;
-        }
-#elif defined(FREEBSD)
         if (hdrp) {
             if (len >= iovec.iov_len) {
                 hdrp = NULL;
@@ -448,13 +393,9 @@ ssize_t dsi_stream_read_file(DSI *dsi, const int fromfd, off_t offset, const siz
             }
         }
         pos += len;
-#endif  /* HAVE_SENDFILEV */
         LOG(log_maxdebug, logtype_dsi, "dsi_stream_read_file: wrote: %zd", len);
         written += len;
     }
-#ifdef HAVE_SENDFILEV
-    written -= DSI_BLOCKSIZ;
-#endif
     dsi->write_count += written;
 
 exit:
@@ -464,8 +405,6 @@ exit:
         return -1;
     return written;
 }
-#endif
-
 
 /*
  * Essentially a loop around buf_read() to ensure "length" bytes are read
