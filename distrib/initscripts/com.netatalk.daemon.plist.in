@@ -5,14 +5,15 @@
 	<key>EnvironmentVariables</key>
 	<dict>
 		<key>PATH</key>
-		<string>@bindir@</string>
+		<string>@prefix@/bin:@prefix@/sbin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+		<key>OBJC_DISABLE_INITIALIZE_FORK_SAFETY</key>
+		<string>YES</string>
 	</dict>
 	<key>Label</key>
 	<string>netatalk</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>@bindir@/netatalkd</string>
-		<string>start</string>
+		<string>@prefix@/sbin/netatalk</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
