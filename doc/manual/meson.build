@@ -3,13 +3,17 @@ manual_xmlfile = configure_file(
     output: 'manual.xml',
     configuration: cdata,
 )
+netatalk_html = configure_file(
+    input: 'netatalk.html.in',
+    output: 'netatalk.html',
+    configuration: cdata,
+)
 
 manpages = [
     'configuration.xml',
     'install.xml',
     'intro.xml',
     'upgrade.xml',
-    'netatalk.html',
 ]
 
 foreach man : manpages
@@ -45,7 +49,6 @@ manual_gen = custom_target(
         'manual-index.html',
         'netatalk.8.html',
         'netatalkconfig.1.html',
-        'pr01.html',
         'table-toc.html',
         'upgrade.html',
     ],
