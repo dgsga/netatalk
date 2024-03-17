@@ -5,6 +5,7 @@
 <!ENTITY Configuration SYSTEM "configuration.xml">
 <!ENTITY Install SYSTEM "install.xml">
 <!ENTITY Intro SYSTEM "intro.xml">
+<!ENTITY License SYSTEM "gpl.xml">
 <!ENTITY Upgrade SYSTEM "upgrade.xml">
 
 <!ENTITY ad.1 SYSTEM "../manpages/man1/ad.1.xml">
@@ -101,7 +102,7 @@ url="http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt">http://www.gnu.org/li
   </chapter>
   <?latex \cleardoublepage ?>
 
-  <?latex \include{gpl}?>
+  &License;
   <?latex \cleardoublepage ?>
 
   <index id="manual-index"><title>Index</title></index>
