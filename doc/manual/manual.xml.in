@@ -101,7 +101,7 @@ url="http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt">http://www.gnu.org/li
   </chapter>
   <?latex \cleardoublepage ?>
 
-  <?latex \include{gpl}?>
+  &License;
   <?latex \cleardoublepage ?>
 
   <index id="manual-index"><title>Index</title></index>

@@ -11,6 +11,7 @@ netatalk_html = configure_file(
 
 manpages = [
     'configuration.xml',
+    'gpl.xml',
     'install.xml',
     'intro.xml',
     'upgrade.xml',
@@ -41,6 +42,7 @@ manual_gen = custom_target(
         'dbd.1.html',
         'example-toc.html',
         'extmap.conf.5.html',
+        'gpl.html',
         'index.html',
         'installation.html',
         'intro.html',
