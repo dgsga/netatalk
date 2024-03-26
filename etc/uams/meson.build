@@ -36,7 +36,7 @@ uams_dhx_pam = shared_module(
 
 install_symlink(
     'uams_dhx.so',
-    install_dir: 'lib/netatalk',
+    install_dir: libdir / 'netatalk',
     pointing_to: 'uams_dhx_pam.so',
 )
 
@@ -67,7 +67,7 @@ uams_dhx2_pam = shared_module(
 
 install_symlink(
     'uams_dhx2.so',
-    install_dir: 'lib/netatalk',
+    install_dir: libdir / 'netatalk',
     pointing_to: 'uams_dhx2_pam.so',
 )
 
