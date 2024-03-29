@@ -18,7 +18,7 @@ install_data(initscript, install_dir: bindir)
 
 if not fs.exists(init_dir / 'com.netatalk.daemon.plist')
     meson.add_install_script(
-        find_program(launchctl),
+        find_program('launchctl'),
         'load',
         '-w',
         init_dir / 'com.netatalk.daemon.plist',
