@@ -434,66 +434,6 @@ AC_DEFUN([AC_NETATALK_INIT_STYLE], [
     ;;
     esac
     case "$init_style" in
-    "redhat")
-	    AC_MSG_ERROR([--with-init-style=redhat is obsoleted. Use redhat-sysv or redhat-systemd.])
-        ;;
-    "redhat-sysv")
-	    AC_MSG_RESULT([enabling redhat-style sysv initscript support])
-	    ac_cv_init_dir="/etc/rc.d/init.d"
-	    ;;
-    "redhat-systemd")
-	    AC_MSG_RESULT([enabling redhat-style systemd support])
-	    ac_cv_init_dir="/usr/lib/systemd/system"
-	    ;;
-    "suse")
-	    AC_MSG_ERROR([--with-init-style=suse is obsoleted. Use suse-sysv or suse-systemd.])
-        ;;
-    "suse-sysv")
-	    AC_MSG_RESULT([enabling suse-style sysv initscript support])
-	    ac_cv_init_dir="/etc/init.d"
-	    ;;
-    "suse-systemd")
-	    AC_MSG_RESULT([enabling suse-style systemd support (>=openSUSE12.1)])
-	    ac_cv_init_dir="/usr/lib/systemd/system"
-	    ;;
-    "gentoo")
-	    AC_MSG_ERROR([--with-init-style=gentoo is obsoleted. Use gentoo-openrc or gentoo-systemd.])
-        ;;
-    "gentoo-openrc")
-	    AC_MSG_RESULT([enabling gentoo-style openrc support])
-	    ac_cv_init_dir="/etc/init.d"
-        ;;
-    "gentoo-systemd")
-	    AC_MSG_RESULT([enabling gentoo-style systemd support])
-	    ac_cv_init_dir="/usr/lib/systemd/system"
-        ;;
-    "netbsd")
-	    AC_MSG_RESULT([enabling netbsd-style initscript support])
-	    ac_cv_init_dir="/etc/rc.d"
-        ;;
-    "debian")
-	    AC_MSG_ERROR([--with-init-style=debian is obsoleted. Use debian-sysv or debian-systemd.])
-        ;;
-    "debian-sysv")
-	    AC_MSG_RESULT([enabling debian-style sysv initscript support])
-	    ac_cv_init_dir="/etc/init.d"
-        ;;
-    "debian-systemd")
-	    AC_MSG_RESULT([enabling debian-style systemd support])
-	    ac_cv_init_dir="/lib/systemd/system"
-	    ;;
-    "solaris")
-	    AC_MSG_RESULT([enabling solaris-style SMF support])
-	    ac_cv_init_dir="/lib/svc/manifest/network/"
-        ;;
-    "openrc")
-	    AC_MSG_RESULT([enabling general openrc support])
-	    ac_cv_init_dir="/etc/init.d"
-        ;;
-    "systemd")
-	    AC_MSG_RESULT([enabling general systemd support])
-	    ac_cv_init_dir="/usr/lib/systemd/system"
-        ;;
     "macos-launchd")
     	AC_MSG_RESULT([enabling macOS-style launchd initscript support])
     	ac_cv_init_dir="/Library/LaunchDaemons"
