@@ -13,8 +13,6 @@
 
 #ifdef HAVE_MDNS
 #include "afp_mdns.h"
-#elif defined (HAVE_AVAHI)
-#include "afp_avahi.h"
 #endif
 
 
@@ -27,10 +25,6 @@ void zeroconf_register(const AFPObj *configs)
   LOG(log_debug, logtype_afpd, "Attempting to register with mDNS using mDNSResponder");
 
 	md_zeroconf_register(configs);
-#elif defined (HAVE_AVAHI)
-  LOG(log_debug, logtype_afpd, "Attempting to register with mDNS using Avahi");
-
-	av_zeroconf_register(configs);
 #endif
 }
 
@@ -39,8 +33,5 @@ void zeroconf_deregister(void)
 #if defined (HAVE_MDNS)
   LOG(log_debug, logtype_afpd, "Attempting to de-register mDNS using mDNSResponder");
 	md_zeroconf_unregister();
-#elif defined (HAVE_AVAHI)
-  LOG(log_debug, logtype_afpd, "Attempting to de-register mDNS using Avahi");
-	av_zeroconf_unregister();
 #endif
 }
