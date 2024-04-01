@@ -1,19 +1,12 @@
 #!/bin/bash
-# Script for compiling netatalk binaries on macOS
+# Script for uninstalling netatalk binaries on macOS
 
 # Set the path for the executable to current folder
 cd "$(dirname $0)"
 
-# Clean repo
-git clean -dxf
-
-# Update repo
-git pull
-
-#Build & install
-meson build
-ninja -C build
-sudo ninja -C build install
+# Unload launch daemon and uninstall
+sudo launchctl unload -w /Library/LaunchDaemons/com.netatalk.daemon.plist
+sudo ninja -C build uninstall
 
 # Exit gracefully
 osascript -e 'tell application "Terminal" to close (every window whose name contains ".command")' &

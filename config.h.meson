@@ -1,0 +1,68 @@
+/* Define if CNID Database Daemon backend should be compiled. */
+#mesondefine CNID_BACKEND_DBD
+
+/* Define if CNID LAST scheme backend should be compiled. */
+#mesondefine CNID_BACKEND_LAST
+
+/* whether the MySQL CNID module is available */
+#mesondefine CNID_BACKEND_MYSQL
+
+/* Default CNID scheme to be used */
+#mesondefine DEFAULT_CNID_SCHEME
+
+/* Available Extended Attributes modules */
+#mesondefine EA_MODULES
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#mesondefine HAVE_DLFCN_H
+
+/* Whether LDAP is available */
+#mesondefine HAVE_LDAP
+
+/* Define if the DHX2 modules should be built with libgcrypt */
+#mesondefine HAVE_LIBGCRYPT
+
+/* Define to 1 if you have the <netdb.h> header file. */
+#mesondefine HAVE_NETDB_H
+
+/* Define to 1 if you have the `pread' function. */
+#mesondefine HAVE_PREAD
+
+/* Define to 1 if you have the `pwrite' function. */
+#mesondefine HAVE_PWRITE
+
+/* Define to 1 if you have the <security/pam_appl.h> header file. */
+#mesondefine HAVE_SECURITY_PAM_APPL_H
+
+/* Whether UCS-2-INTERNAL is supported */
+#mesondefine HAVE_UCS2INTERNAL
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#mesondefine HAVE_UNISTD_H
+
+/* Whether to use native iconv */
+#mesondefine HAVE_USABLE_ICONV
+
+/* Define as const if the declaration of iconv() needs const. */
+#mesondefine ICONV_CONST
+
+/* errno returned by open with O_NOFOLLOW */
+#mesondefine OPEN_NOFOLLOW_ERRNO
+
+/* Define if the OpenSSL DHX modules should be built */
+#mesondefine OPENSSL_DHX
+
+/* netatalk lockfile path */
+#mesondefine PATH_NETATALK_LOCK
+
+/* Define if the DHX UAM modules should be compiled */
+#mesondefine UAM_DHX
+
+/* Define if the DHX2 UAM modules should be compiled */
+#mesondefine UAM_DHX2
+
+/* Define to enable PAM support */
+#mesondefine USE_PAM
+
+/* Version number of package */
+#define VERSION "@version@"

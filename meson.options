@@ -1,0 +1,5 @@
+option('build-manual', type : 'boolean', value : false,
+	description : 'Build html manual')
+
+option('build-tests', type: 'boolean', value: false,
+  description: 'Run tests after build')
