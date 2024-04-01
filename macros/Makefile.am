@@ -6,7 +6,6 @@ EXTRA_DIST = \
 	grep-check.m4		\
 	gssapi-check.m4		\
 	iconv.m4		\
-	largefile-check.m4	\
 	libgcrypt.m4		\
 	netatalk.m4		\
 	pam-check.m4		\

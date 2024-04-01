@@ -56,8 +56,6 @@ AC_CHECK_HEADERS([sys/mount.h], , ,
 ])
 AC_CHECK_TYPES([fshare_t], [], [], [[#include <fcntl.h>]])
 
-AC_SYS_LARGEFILE([], AC_MSG_ERROR([AFP 3.x support requires Large File Support.]))
-
 dnl --------------------------------------------------------------------------
 dnl check if dlsym needs to add an underscore, uses libtool macros
 dnl --------------------------------------------------------------------------
