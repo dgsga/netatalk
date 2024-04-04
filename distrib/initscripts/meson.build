@@ -14,7 +14,7 @@ initscript = configure_file(
     configuration: cdata,
 )
 
-install_data(initscript, install_dir: bindir)
+install_data(initscript, install_dir: bindir, install_mode: 'rwxr-xr-x')
 
 if not fs.exists(init_dir / 'com.netatalk.daemon.plist')
     meson.add_install_script(
