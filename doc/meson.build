@@ -10,6 +10,7 @@ manual_stylesheet = configure_file(
     configuration: cdata,
 )
 
+subdir('ja')
 subdir('manpages')
 
 if get_option('build-manual')
