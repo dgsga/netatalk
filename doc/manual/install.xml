@@ -187,14 +187,34 @@ Resolving deltas: 100% (32227/32227), done.
 
         <itemizedlist>
           <listitem>
-            <para>mDNSresponderPOSIX or Avahi for Bonjour (aka
-            Zeroconf)</para>
+            <para>OpenSSL</para>
 
-            <para>Mac OS X 10.2 and later use Bonjour
-            (a.k.a. Zeroconf, and earlier Rendezvous)
-            for service discovery.</para>
+            <para>OpenSSL 1.x or LibreSSL is needed for the older DHCAST128 (a.k.a.
+            DHX) UAM, which provides the strongest password encryption for
+            Classic Mac OS.</para>
+          </listitem>
 
-            <para>The Avahi library must be built with DBUS support (
+          <listitem>
+            <para>Tracker for Spotlight<indexterm>
+                <primary>Spotlight</primary>
+              </indexterm> support</para>
+
+            <para>Netatalk uses <ulink
+            url="https://tracker.gnome.org">Tracker</ulink> as the
+            metadata backend. The minimum required version is 0.7 as that's the
+            first version to support <ulink url="https://gnome.pages.gitlab.gnome.org/tracker/">
+            SPARQL</ulink>.</para>
+          </listitem>
+
+          <listitem>
+            <para>mDNSresponder or Avahi for Bonjour</para>
+
+            <para>Mac OS X 10.2 and later uses Bonjour (a.k.a. Zeroconf)
+            for automatic service discovery.
+            Netatalk can advertise AFP file sharing and Time Machine volumes
+            by using Avahi or mDNSResponder.</para>
+
+            <para>The Avahi library itself must be built with DBUS support (
             <userinput>--enable-dbus</userinput>).</para>
           </listitem>
 
