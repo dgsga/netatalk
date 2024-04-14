@@ -9,7 +9,8 @@ netatalk_html = configure_file(
     configuration: cdata,
 )
 
-manpages = [
+manual_pages = [
+    'compile.xml',
     'configuration.xml',
     'gpl.xml',
     'install.xml',
@@ -17,7 +18,7 @@ manpages = [
     'upgrade.xml',
 ]
 
-foreach man : manpages
+foreach man : manual_pages
     manual_htmlfile = configure_file(
         input: man,
         output: man,
@@ -38,6 +39,7 @@ manual_gen = custom_target(
         'asip-status.1.html',
         'cnid_dbd.8.html',
         'cnid_metad.8.html',
+        'compile.html',
         'configuration.html',
         'dbd.1.html',
         'example-toc.html',
