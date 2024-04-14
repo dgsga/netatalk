@@ -177,10 +177,20 @@ summary(summary_info, bool_yn: true, section: 'Compilation:')
 
 summary({'Netatalk version': version}, section: 'Configuration Summary:')
 summary_info = {
+    '  Initscript style': 'macos-launchd',
+}
+summary(summary_info, bool_yn: true, section: '  Init Style:')
+
+summary_info = {
     '  Extended Attributes': true,
     '  Spotlight support': 'native',
 }
 summary(summary_info, bool_yn: true, section: '  AFP:')
+
+summary_info = {
+    '  Backends': 'dbd last',
+}
+summary(summary_info, bool_yn: true, section: '  CNID:')
 
 summary_info = {
     '  Kerberos V': true,
