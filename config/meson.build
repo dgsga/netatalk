@@ -1,12 +1,10 @@
-afp_conf_exists = fs.exists(pkgconfdir / 'afp.conf')
-
 afp_conf = configure_file(
     input: 'afp.conf.tmpl',
     output: 'afp.conf',
     configuration: cdata,
 )
 
-if afp_conf_exists
+if fs.exists(pkgconfdir / 'afp.conf')
 else
     install_data(afp_conf, install_dir: pkgconfdir)
 endif
