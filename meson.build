@@ -206,6 +206,7 @@ summary_info = {
     '  Kerberos support': true,
     '  LDAP support': true,
     '  Zeroconf support': true,
+    '  Zeroconf provider': 'mDNSResponder',
 }
 summary(summary_info, bool_yn: true, section: '  Options:')
 
