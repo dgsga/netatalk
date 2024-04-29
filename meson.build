@@ -197,7 +197,7 @@ summary_info = {
     '  DHX': 'PAM',
     '  DHX2': 'PAM',
 }
-summary(summary_info, bool_yn: true, section: '  UAMS:')
+summary(summary_info, bool_yn: true, section: '  UAMs:')
 
 summary_info = {
     '  AFP stats via dbus': true,
