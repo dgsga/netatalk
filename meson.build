@@ -213,7 +213,7 @@ summary(summary_info, bool_yn: true, section: '  Options:')
 summary_info = {
     '  dbus daemon path': bindir / 'dbus-daemon',
     '  dbus system directory': pkgconfdir / 'dbus-1/system.d',
-    '  init directory': 'Library/LaunchDaemons',
+    '  init directory': '/Library/LaunchDaemons',
     '  Netatalk lockfile': '/var/run/netatalk.pid',
 }
 summary(summary_info, bool_yn: true, section: '  Paths:')
