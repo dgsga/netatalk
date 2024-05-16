@@ -7,7 +7,11 @@
 
     <refmiscinfo class="date">12 Nov 2015</refmiscinfo>
 
-    <refmiscinfo class="source">@NETATALK_VERSION@</refmiscinfo>
+    <refmiscinfo class="source">Netatalk</refmiscinfo>
+
+    <refmiscinfo class="manual">Netatalk AFP ファイルサーバーのマニュアル</refmiscinfo>
+
+    <refmiscinfo class="version">@NETATALK_VERSION@</refmiscinfo>
   </refmeta>
 
   <refnamediv>
@@ -40,7 +44,8 @@
         <term>-c</term>
 
         <listitem>
-          <para>「<option>appledouble = v2</option>」から「<option>appledouble = ea</option>」へ変換する</para>
+          <para>「<option>appledouble = v2</option>」から「<option>appledouble =
+          ea</option>」へ変換する</para>
         </listitem>
       </varlistentry>
 
@@ -120,5 +125,12 @@
 
         <manvolnum>8</manvolnum>
       </citerefentry></para>
+  </refsect1>
+
+  <refsect1>
+    <title>著作者</title>
+
+    <para><ulink
+    url="https://github.com/Netatalk/netatalk/blob/main/CONTRIBUTORS">CONTRIBUTORS</ulink>を参照</para>
   </refsect1>
 </refentry>
