@@ -1,7 +1,7 @@
 project(
     'netatalk',
     'c',
-    version: '3.1.18',
+    version: '3.2.0',
     license: 'GPLv2',
     default_options: ['warning_level=3', 'c_std=c11'],
     meson_version: '>=1.1.0',
