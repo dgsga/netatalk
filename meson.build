@@ -1702,9 +1702,15 @@ endif
 # Check for POSIX threads
 #
 
-threads = dependency('threads', required: true)
+threads = dependency('threads', required: false)
+
 if threads.found()
     cdata.set('HAVE_PTHREAD', 1)
+else
+    libpthread = cc.find_library('pthread', required: true)
+    if libpthread.found()
+        cdata.set('HAVE_PTHREAD', 1)
+    endif
 endif
 
 # Check for PTHREAD_PRIO_INHERIT
