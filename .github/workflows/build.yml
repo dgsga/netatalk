@@ -54,6 +54,7 @@ env:
     libwolfssl-dev \
     libwrap0-dev \
     meson \
+    nettle-dev \
     ninja-build \
     quota \
     systemtap-sdt-dev \
@@ -97,6 +98,7 @@ jobs:
             libtracker \
             linux-pam-dev \
             meson \
+            nettle-dev \
             ninja \
             openldap-dev \
             openrc \
@@ -156,6 +158,7 @@ jobs:
             libtool \
             make \
             meson \
+            nettle \
             ninja \
             pkgconfig \
             rpcsvc-proto
@@ -231,6 +234,7 @@ jobs:
             libwrap0-dev \
             make \
             meson \
+            nettle-dev \
             ninja-build \
             quota \
             systemtap-sdt-dev \
@@ -305,6 +309,7 @@ jobs:
             libtalloc-devel \
             libtool \
             meson \
+            nettle-devel \
             ninja-build \
             openldap-devel \
             openssl-devel \
@@ -385,6 +390,7 @@ jobs:
             libevent-devel \
             libgcrypt-devel \
             libmariadb-devel \
+            libnettle-devel \
             libopenssl-devel \
             libtalloc-devel \
             libtdb-devel \
@@ -514,6 +520,7 @@ jobs:
               libgcrypt \
               libtool \
               meson \
+              nettle \
               openldap26-client \
               perl5 \
               pkgconf \
@@ -566,6 +573,7 @@ jobs:
               libressl \
               libtool \
               meson \
+              nettle \
               openldap26-client-2.6.7 \
               pkgconf \
               talloc \
@@ -632,6 +640,7 @@ jobs:
               libressl \
               libtool \
               meson \
+              nettle \
               pkg-config \
               talloc
           run: |
@@ -673,7 +682,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build on VM
-        uses: vmactions/openbsd-vm@v1.0.7
+        uses: vmactions/openbsd-vm@v1
         with:
           copyback: false
           prepare: |
@@ -684,14 +693,15 @@ jobs:
               bison \
               dbus-glib \
               db-4.6.21p7v0 \
-              gcc-11.2.0p9 \
+              gcc-11.2.0p11 \
               gmake \
               libevent \
               libgcrypt \
+              libnettle \
               libtalloc \
               libtool \
               meson \
-              openldap-client-2.6.6v0 \
+              openldap-client-2.6.7v0 \
               openpam \
               pkgconf \
               tracker3
@@ -738,7 +748,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: brew install automake berkeley-db libressl libtool meson mysql talloc
+        run: brew install automake berkeley-db libressl libtool meson mysql nettle talloc
       - name: Autotools - Bootstrap
         run: ./bootstrap
       - name: Autotools - Configure
@@ -806,6 +816,7 @@ jobs:
               libevent \
               libgcrypt \
               meson \
+              nettle \
               talloc
           run: |
             set -e
