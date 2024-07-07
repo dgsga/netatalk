@@ -37,6 +37,7 @@ ENV BUILD_DEPS \
     linux-pam-dev \
     meson \
     ninja \
+    nettle-dev \
     openldap-dev \
     openssl \
     openssl-dev \
