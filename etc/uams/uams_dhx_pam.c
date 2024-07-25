@@ -19,8 +19,10 @@
 #include <wolfssl/openssl/err.h>
 #include <wolfssl/openssl/ssl.h>
 
+#include <nettle/cast128.h>
+#include <nettle/cbc.h>
+
 #include <atalk/afp.h>
-#include <atalk/cast.h>
 #include <atalk/logger.h>
 #include <atalk/uam.h>
 
@@ -30,12 +32,13 @@
 #define CRYPT2BUFLEN (KEYSIZE + PASSWDLEN)
 #define CHANGEPWBUFLEN (KEYSIZE + 2*PASSWDLEN)
 
+
 /* hash a number to a 16-bit quantity */
 #define dhxhash(a) ((((unsigned long) (a) >> 8) ^ \
 		     (unsigned long) (a)) & 0xffff)
 
 /* the secret key */
-static CAST_KEY castkey;
+struct CBC_CTX(struct cast128_ctx, CAST128_BLOCK_SIZE) castkey;
 static struct passwd *dhxpwd;
 static uint8_t randbuf[KEYSIZE];
 
@@ -250,7 +253,7 @@ static int dhx_setup(void *obj, char *ibuf, size_t ibuflen _U_,
     i = DH_compute_key((unsigned char *)rbuf, bn, dh);
 
     /* set the key */
-    CAST_set_key(&castkey, i, (unsigned char *)rbuf);
+    cast5_set_key((struct cast128_ctx *)&castkey, (int) i, (unsigned char *)rbuf);
 
     /* session id. it's just a hashed version of the object pointer. */
     sessid = dhxhash(obj);
@@ -293,8 +296,8 @@ static int dhx_setup(void *obj, char *ibuf, size_t ibuflen _U_,
 #endif /* 0 */
 
     /* encrypt using cast */
-    CAST_cbc_encrypt((unsigned char *)rbuf, (unsigned char *)rbuf, CRYPTBUFLEN, &castkey, msg2_iv,
-		     CAST_ENCRYPT);
+    CBC_SET_IV(&castkey, msg2_iv);
+    CBC_ENCRYPT(&castkey, cast128_encrypt, CRYPTBUFLEN, (unsigned char *)rbuf, (unsigned char *)rbuf);
     *rbuflen += CRYPTBUFLEN;
     BN_free(bn);
     DH_free(dh);
@@ -428,8 +431,8 @@ static int pam_logincont(void *obj, struct passwd **uam_pwd,
 	hostname = NULL;
 	}
 
-    CAST_cbc_encrypt((unsigned char *)ibuf, (unsigned char *)rbuf, CRYPT2BUFLEN, &castkey,
-		     msg3_iv, CAST_DECRYPT);
+    CBC_SET_IV(&castkey, msg3_iv);
+    CBC_DECRYPT(&castkey, cast128_decrypt, CRYPTBUFLEN, (unsigned char *)rbuf, (unsigned char *)ibuf);
     memset(&castkey, 0, sizeof(castkey));
 
     /* check to make sure that the random number is the same. we
@@ -605,8 +608,8 @@ static int pam_changepw(void *obj, char *username,
     }
 
     /* grab the client's nonce, old password, and new password. */
-    CAST_cbc_encrypt((unsigned char *)ibuf, (unsigned char *)ibuf, CHANGEPWBUFLEN, &castkey,
-		     msg3_iv, CAST_DECRYPT);
+    CBC_SET_IV(&castkey, msg3_iv);
+    CBC_DECRYPT(&castkey, cast128_decrypt, CRYPTBUFLEN, (unsigned char *)ibuf, (unsigned char *)ibuf);
     memset(&castkey, 0, sizeof(castkey));
 
     /* check to make sure that the random number is the same. we

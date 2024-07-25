@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: [macos-latest]
     steps:
-    - uses: actions/checkout@v3
-    - run: brew install dgsga/netatalk-dbus/dbus-glib docbook-xsl meson mysql wolfssl
-    - run: meson setup -DRUN_TESTS=true build 
+    - uses: actions/checkout@v4
+    - run: brew install dgsga/netatalk-dbus/dbus-glib docbook-xsl meson mysql nettle wolfssl
+    - run: meson setup build -Dbuild-tests=true
     - run: ninja -C build
     - run: ninja -C build test

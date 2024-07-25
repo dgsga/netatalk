@@ -89,6 +89,7 @@ libgcrypt = dependency('libgcrypt', required: true)
 libiconv = dependency('iconv', method: 'system', required: true)
 mysqlclient = dependency('mysqlclient', required: true)
 threads = dependency('threads', required: true)
+nettle = dependency('nettle', required: true)
 wolfssl = dependency('wolfssl', required: true)
 zeroconf = dependency('system', required: true)
 
