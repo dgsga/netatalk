@@ -64,7 +64,7 @@ inc = include_directories(
     '.',
     'etc/afpd',
     'include',
-    prefix / 'opt/db/include',
+    prefix / 'opt/berkeley-db/include',
 )
 
 #############
